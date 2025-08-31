@@ -11,31 +11,33 @@ import java.util.Optional;
 
 @Component
 public class JournalEntryService {
-    
-    
-    
-    @Autowired
-    private JournalEntryRepo journalEntryRepo;
-    
 
-    public void saveEntry(JournalEntry journalEntry)
-    {
-        journalEntryRepo.save(journalEntry) ;
-}
 
-    public List<JournalEntry> getAll(){
-        return journalEntryRepo.findAll() ;
-        
+        @Autowired
+        private JournalEntryRepo journalEntryRepo;
+
+
+        public void saveEntry(JournalEntry journalEntry)
+        {
+            journalEntryRepo.save(journalEntry) ;
+        }
+
+        public List<JournalEntry> getAll(){
+            return journalEntryRepo.findAll() ;
+
+        }
+
+        public Optional<JournalEntry> findById(ObjectId id) {
+            return journalEntryRepo.findById(id) ;
+
+        }
+
+        public void deleteById(ObjectId id) {
+            journalEntryRepo.deleteById(id) ;
+
+        }
+
     }
 
-public Optional<JournalEntry> findById(ObjectId id) {
-        return journalEntryRepo.findById(id) ;
 
-}
-
-public void deleteById(ObjectId id) {
-        journalEntryRepo.deleteById(id) ;
-
-}
-
-}
+    
