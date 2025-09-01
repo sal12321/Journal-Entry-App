@@ -61,11 +61,7 @@ public class JournalEntryControllerv2 {
     @GetMapping("id/{myId}")
     public ResponseEntity<JournalEntry> getJournalEntryById(@PathVariable ObjectId myId) {
         Optional<JournalEntry> journalEntry = journalEntryService.findById(myId);
-        if (journalEntry.isPresent()) {
-            return new ResponseEntity<>(journalEntry.get(), HttpStatus.OK);
-
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return journalEntry.map(entry -> new ResponseEntity<>(entry, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
@@ -79,35 +75,40 @@ public class JournalEntryControllerv2 {
     }
 
 
-    @PutMapping("id/{myId}")
-    public ResponseEntity<?> updateJournalEntry(@PathVariable ObjectId myId, @RequestBody JournalEntry newEntry) {
-        JournalEntry old = journalEntryService.findById(myId).orElse(null);   // first get the entry
-//        if (old != null) {
-//            if (newEntry.getTitle() == null && newEntry.getTitle().equals("")) {
-//                newEntry.setTitle(old.getTitle());
-//
-//            } else {
-//                old.setTitle(newEntry.getTitle());
-//
-//            }
-//
-//            if (newEntry.getContent() == null && newEntry.getContent().equals("")) {
-//                newEntry.setContent(old.getContent());
-//
-//
-//            } else {
-//                old.setContent(newEntry.getTitle());
-//            }
-//
-//
-//            journalEntryService.saveEntry(newEntry, foundUser);
-//            return new ResponseEntity<>(HttpStatus.OK);
-//
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
+    @PutMapping("id/{userName}/{myId}")
+    public ResponseEntity<?> updateJournalEntry(
+            @PathVariable ObjectId myId,
+            @RequestBody JournalEntry newEntry,
+            @PathVariable String userName  ) {
 
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        JournalEntry old = journalEntryService.findById(myId).orElse(null);   // first get the entry
+        if (old != null) {
+            if (newEntry.getTitle() == null && newEntry.getTitle().equals("")) {
+                newEntry.setTitle(old.getTitle());
+
+            } else {
+                old.setTitle(newEntry.getTitle());
+
+            }
+
+            if (newEntry.getContent() == null && newEntry.getContent().equals("")) {
+                newEntry.setContent(old.getContent());
+
+
+            } else {
+                old.setContent(newEntry.getTitle());
+            }
+
+
+
+            journalEntryService.saveEntry(newEntry);
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+
     }
 
 

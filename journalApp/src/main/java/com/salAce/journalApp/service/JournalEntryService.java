@@ -30,11 +30,16 @@ public class JournalEntryService {
           foundUser.getJournalEntries().add(saved) ;
           userEntryService.saveEntry(foundUser) ;
         }
+        public void saveEntry(JournalEntry journalEntry)
+        {
+            journalEntryRepo.save(journalEntry) ;
+        }
 
         public List<JournalEntry> getAll(){
             return journalEntryRepo.findAll() ;
 
         }
+
 
         public Optional<JournalEntry> findById(ObjectId id) {
             return journalEntryRepo.findById(id) ;
