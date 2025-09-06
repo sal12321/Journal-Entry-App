@@ -17,9 +17,9 @@
 
 
 		@Bean
-		public MongoTransactionManager   trans(MongoDatabaseFactory dbFactory){
-	// we use the instance of this to do any work with db like getSessions etc
-			return new MongoTransactionManager(dbFactory) ; // this helps to work with database... like connection, transaction and all other stuffs
+		public MongoTransactionManager trans(MongoDatabaseFactory dbFactory){
+
+			return new MongoTransactionManager(dbFactory) ;
 		}
 
 	}

@@ -30,10 +30,11 @@ public class JournalEntryService {
                 JournalEntry saved =   journalEntryRepo.save(journalEntry) ;
                 foundUser.getJournalEntries().add(saved) ;
 //                foundUser.setUserName(null);
-                userEntryService.saveEntry(foundUser) ;
+                userEntryService.updateJournalEntries(foundUser) ;
+//                userEntryService.saveEntry(foundUser) ;
             } catch(Exception e){
 //                System.out.println(e.getMessage());
-                throw new Exception("generated exception") ;
+                throw new Exception("generated exception" , e) ;
             }
 
         }
