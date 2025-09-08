@@ -75,7 +75,7 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/public/**").permitAll()      // open endpoints
+                        .requestMatchers("/public/**" ).permitAll()      // open endpoints
                         .requestMatchers("/journal/**", "/user/**").authenticated() // logged-in users
                         .requestMatchers("/admin/**").hasRole("ADMIN") // only admins
                         .anyRequest().authenticated()

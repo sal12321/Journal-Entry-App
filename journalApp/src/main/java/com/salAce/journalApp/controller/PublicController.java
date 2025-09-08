@@ -11,10 +11,15 @@ public class PublicController {
     @Autowired
     private UserEntryService userEntryService ;
 
+    @GetMapping("/check")
+    public String check(){
+        return "ok" ;
+    }
 
     @PostMapping("/create-user")
     public void createUser(@RequestBody User user){
-        userEntryService.saveEntry(user);
+        userEntryService.saveNewEntry(user);
 
     }
+
 }
