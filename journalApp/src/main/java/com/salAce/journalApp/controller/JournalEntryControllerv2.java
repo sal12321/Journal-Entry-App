@@ -129,16 +129,12 @@ public class JournalEntryControllerv2 {
                 if (!(newEntry.getTitle() == null && newEntry.getTitle().equals(""))) {
                     old.setTitle(newEntry.getTitle());
                 }
-//                else {
-//                    old.setTitle(newEntry.getTitle());
-//                }
+
 
                     if (!(newEntry.getContent() == null && newEntry.getContent().equals(""))) {
                         old.setContent(newEntry.getContent());
                 }
-//                else {
-//                    old.setContent(newEntry.getTitle());
-//                }
+
 
 
                         journalEntryService.saveEntry(old);

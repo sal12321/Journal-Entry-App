@@ -31,6 +31,21 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT) ;
 
         }
+    @PostMapping("/create-user")
+    public ResponseEntity<?> createAdmin(@RequestBody User user){
+     boolean created = userEntryService.saveNewEntry(user);
+
+     if(created) {
+         return new ResponseEntity<>(HttpStatus.CREATED) ;
+
+     }
+     else{
+         return new ResponseEntity<>(HttpStatus.CONFLICT) ;
+
+     }
+
+    }
+
 
 
     }

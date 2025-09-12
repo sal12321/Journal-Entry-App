@@ -5,6 +5,8 @@ import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.repo.JournalEntryRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
+
+// simple logging facad 4 java (slf4 is an api interface which is implemeted by logBack)
 @Slf4j
 @Component
 public class JournalEntryService {
@@ -21,6 +26,8 @@ public class JournalEntryService {
         private JournalEntryRepo journalEntryRepo;
         @Autowired
         private UserEntryService userEntryService ;
+//        we are using logBack logger that is by default configured by spring boot
+       private static final Logger logger = LoggerFactory.getLogger(JournalEntryService.class) ;
 
 @Transactional
         public void saveEntry(JournalEntry journalEntry, String userName) throws Exception
@@ -71,7 +78,9 @@ public class JournalEntryService {
         }
     }catch(Exception e ) {
 
-        System.out.println(e);
+//        System.out.println(e);
+        logger.info("haahhaahhahaha this is made by me");
+        log.error("error has occured for {}" , userName , e) ;
         throw new RuntimeException("an error has occured while deleting the entry " ,e );
 
 
@@ -80,10 +89,7 @@ public class JournalEntryService {
 
 
         }
-//        public List<JournalEntry> findByUserName(String userName) {
-//
-//
-//        }
+
 
     }
 
