@@ -19,15 +19,11 @@
 	<description>E2EE Journal App</description>
 
 	<properties>
-
-			<sonar.organization>aaqib</sonar.organization>
-<!--		this is for sonar cloud, "aaqib" is organization's name-->
-
 		<java.version>17</java.version>
 
-		<!-- ✅ SonarQube Config -->
-		<sonar.host.url>http://localhost:9000</sonar.host.url>
-		<sonar.login>squ_52f03a718cb855fc8b63791e784bc553c617c07b</sonar.login>
+		<!-- ✅ SonarCloud Config -->
+		<sonar.organization>aaqib</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.projectKey>journalApp</sonar.projectKey>
 		<sonar.projectName>Journal App</sonar.projectName>
 		<sonar.projectVersion>1.0</sonar.projectVersion>
@@ -86,7 +82,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<!-- SonarQube Maven Plugin -->
+			<!-- SonarCloud Plugin -->
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
