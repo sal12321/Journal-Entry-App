@@ -19,6 +19,10 @@
 	<description>E2EE Journal App</description>
 
 	<properties>
+
+			<sonar.organization>aaqib</sonar.organization>
+<!--		this is for sonar cloud, "aaqib" is organization's name-->
+
 		<java.version>17</java.version>
 
 		<!-- ✅ SonarQube Config -->
