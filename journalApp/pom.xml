@@ -19,16 +19,10 @@
 	<description>E2EE Journal App</description>
 
 	<properties>
-		<java.version>17</java.version>
 
-		<!-- ✅ SonarCloud Config -->
-		<sonar.organization>aaqib</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.projectKey>journalApp</sonar.projectKey>
-		<sonar.projectName>Journal App</sonar.projectName>
-		<sonar.projectVersion>1.0</sonar.projectVersion>
-		<sonar.sources>src/main/java</sonar.sources>
-		<sonar.exclusions>**/test/**</sonar.exclusions>
+			<sonar.organization>aaqib</sonar.organization>
+
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
