@@ -9,8 +9,9 @@
 	import org.springframework.data.mongodb.MongoDatabaseFactory;
 	import org.springframework.data.mongodb.MongoTransactionManager;
 	import org.springframework.transaction.annotation.EnableTransactionManagement;
+	import org.springframework.web.client.RestTemplate;
 
-    import java.util.Arrays;
+	import java.util.Arrays;
 
     @SpringBootApplication
 	@EnableTransactionManagement
@@ -31,5 +32,11 @@
 
 			return new MongoTransactionManager(dbFactory) ;
 		}
+		@Bean
+		RestTemplate restTemplate (){
+			return new RestTemplate();
+		}
+
+
 
 	}
