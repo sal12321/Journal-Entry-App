@@ -20,7 +20,8 @@
 
 	<properties>
 
-		<sonar.organization>salim</sonar.organization>
+		<sonar.organization>aaqib</sonar.organization>
+
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
 		<java.version>17</java.version>
