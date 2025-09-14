@@ -54,6 +54,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
         User user = userEntryRepo.findByUserName(username);
 
         if (user != null) {
+            // the spring security is fetching the username and password from basic auth Header adn using here to find
+            // the user verification is not done here, it is internally done when we call httpBasic() in spring security
             return org.springframework.security.core.userdetails.User.builder()
                     .username(user.getUserName())
                     .password(user.getPassword())

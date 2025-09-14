@@ -78,7 +78,7 @@ public class SpringSecurity {
                         .requestMatchers("/public/**" ).permitAll()      // open endpoints
                         .requestMatchers("/journal/**", "/user/**").authenticated() // logged-in users
                         .requestMatchers("/admin/**").hasRole("ADMIN") // only admins
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults()) // basic auth
                 .csrf(AbstractHttpConfigurer::disable) // disable CSRF for APIs
