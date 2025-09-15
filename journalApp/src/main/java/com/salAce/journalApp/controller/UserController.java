@@ -74,7 +74,7 @@ public class UserController {
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
 
-                return new ResponseEntity<>("HI" + authentication.getName() + res.toString(), HttpStatus.OK);
+                return new ResponseEntity<>("HI " + authentication.getName() + res.toString(), HttpStatus.OK);
 
             }
 

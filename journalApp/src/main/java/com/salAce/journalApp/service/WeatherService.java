@@ -2,21 +2,26 @@ package com.salAce.journalApp.service;
 
 import com.salAce.journalApp.api.response.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Component
+//@Component
+@Service
 public class WeatherService {
 
     @Autowired
     private RestTemplate restTemplate ;
     // it is a class in spring boot which process the request and provide us the response
 
-    private static final String  apiKey = "ef2f7500dfeb1ba3b07890f4b005bff8";
-    private static final String  api = "http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
+    @Value("${weather.api.key}")
+    private String apiKey ;
 
+    @Value("${weather.api}")
+    private String  api ;
     public WeatherResponse getWeather(String  city ) {
 
         final String Api =  api.replace("CITY" , city).replace("API_KEY" , apiKey) ;
