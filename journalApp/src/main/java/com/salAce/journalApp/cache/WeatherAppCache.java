@@ -12,7 +12,7 @@ import java.util.Map;
 ///  making this class as a component as this is made to store the config from the database and immediately as we are using the PostConstruct annotation
 /// trying to cash the data to use in another class
 @Component
-public class AppCache {
+public class WeatherAppCache {
 
     @Autowired
     private ConfigJournalAppRepo configJournalAppRepo ;

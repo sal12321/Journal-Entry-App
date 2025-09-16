@@ -1,6 +1,8 @@
 package com.salAce.journalApp.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -10,23 +12,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "users")
 @Data
-public class User {
+public class SAuser {
 
-        @Id
-        private ObjectId id;
 
-        @Indexed(unique = true)
-        @NonNull
         private String userName ;
-        @NonNull
-        private String password ;
+
         private String email;
-        private boolean sentimentAnalysis ; // sentiment means the mood of the user
-        @DBRef
-        private List<JournalEntry> journalEntries = new ArrayList<>() ;
+        private boolean sentimentAnalysis ; // sentiment means the mood of the
         private List<String> roles ;
 
 
