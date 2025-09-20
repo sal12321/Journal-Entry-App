@@ -23,7 +23,7 @@ public class UserRepositoryImpl{
 
 
         List<SAuser> foundSAuser =  mongoTemplate.find(query , SAuser.class) ;
-//        I am using "orm" object relational mapping concept using the database document as an object .
+//        I am using "orm" object relational mapping concept using the database document as an object.
 
 
         return foundSAuser;

@@ -42,6 +42,7 @@ public class JournalEntryControllerv2 {
         User foundUser = userEntryService.findByUserName(userName);
         List<JournalEntry> all = foundUser.getJournalEntries();
 
+
         if (all != null) {
             return new ResponseEntity<>(all, HttpStatus.OK);
         }
@@ -150,3 +151,5 @@ public class JournalEntryControllerv2 {
 
 
         }
+
+

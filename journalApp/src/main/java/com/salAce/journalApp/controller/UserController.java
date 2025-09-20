@@ -2,8 +2,10 @@ package com.salAce.journalApp.controller;
 
 import com.salAce.journalApp.api.response.WeatherResponse;
 import com.salAce.journalApp.entity.User;
+import com.salAce.journalApp.schedular.UserSchedular;
 import com.salAce.journalApp.service.UserEntryService;
 import com.salAce.journalApp.service.WeatherService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;// prettier
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 
 public class UserController {
 
@@ -25,6 +28,8 @@ public class UserController {
         private UserEntryService userEntryService ;
         @Autowired
         WeatherService weatherService ;
+        @Autowired
+        UserSchedular userSchedular ;
 
 
         @PutMapping()
@@ -53,7 +58,20 @@ public class UserController {
 
      }
 
+    } @PostMapping("/send-me-mail")
+
+    public ResponseEntity<?> mailBhejoReBaba(){
+     try{
+         userSchedular.fetchUserAndSendSaMail();
+         return new ResponseEntity<>(HttpStatus.OK) ;
+     }
+     catch (Exception e) {
+         log.error("error in sending the email"  +e) ;
+         return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
+     }
+
     }
+
 
     @GetMapping
     public ResponseEntity<?> greeting(){

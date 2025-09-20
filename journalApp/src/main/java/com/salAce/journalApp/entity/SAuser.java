@@ -24,6 +24,8 @@ public class SAuser {
         private String email;
         private boolean sentimentAnalysis ; // sentiment means the mood of the
         private List<String> roles ;
+        @DBRef
+        private List<JournalEntry> journalEntries = new ArrayList<>() ;
 
 
     }
