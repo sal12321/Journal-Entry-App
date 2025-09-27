@@ -2,7 +2,6 @@ package com.salAce.journalApp.schedular;
 
 import com.salAce.journalApp.entity.JournalEntry;
 import com.salAce.journalApp.entity.SAuser;
-import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.enums.Sentiment;
 import com.salAce.journalApp.service.EmailService;
 import com.salAce.journalApp.service.SentimentAnalysisService;
@@ -29,8 +28,9 @@ public class UserSchedular {
     private SentimentAnalysisService sentimentAnalysisService ;
 
 //  cron mens cronos which means time
-//    @Scheduled(cron = "*/1 * * * *")
-@Scheduled(cron = "*/1 * * * * *")
+    //    @Scheduled(cron = "*/1 * * * *")
+@Scheduled(cron = "0 */10 * * * *") //every 10minutes
+
 
 
 public void fetchUserAndSendSaMail(){

@@ -2,6 +2,7 @@ package com.salAce.journalApp.controller;
 
 import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.service.UserEntryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-
+@Slf4j
 
 public class AdminController {
 
@@ -32,12 +33,16 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
     }
 
-    @PostMapping("/create-user")
+    @PostMapping("/create-admin")
     public ResponseEntity<?> createAdmin(@RequestBody User user){
+        try{
+            userEntryService.saveAdmin(user);
 
-        userEntryService.saveAdmin(user);
-
-        return new ResponseEntity<>(HttpStatus.OK) ;
+            return new ResponseEntity<>(HttpStatus.CREATED) ;
+        } catch (Exception e){
+            log.error("Error in creating admin " + e) ;
+        }
+return new ResponseEntity<>(HttpStatus.BAD_REQUEST) ;
     }
 
 }
