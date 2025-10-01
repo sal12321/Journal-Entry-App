@@ -2,6 +2,7 @@ package com.salAce.journalApp.controller;
 
 
 import ch.qos.logback.classic.Logger;
+import com.salAce.journalApp.entity.LoginDTO;
 import com.salAce.journalApp.entity.SAuser;
 import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.service.EmailService;
@@ -9,6 +10,7 @@ import com.salAce.journalApp.service.UserDetailsServiceImp;
 import com.salAce.journalApp.service.UserRepositoryImpl;
 import com.salAce.journalApp.service.UserEntryService;
 import com.salAce.journalApp.utils.JwtUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@Tag(name = "Public APIs", description = "Login and Signup")
 
 @RestController ///  so that these methods will return in json/text format and not any jsp or html....
 @Slf4j
@@ -60,7 +64,7 @@ public class PublicController {
      }
 
      @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user){
+    public ResponseEntity<?> login(@RequestBody LoginDTO user){
 
 
 

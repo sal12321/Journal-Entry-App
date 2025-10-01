@@ -5,6 +5,8 @@ import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.schedular.UserSchedular;
 import com.salAce.journalApp.service.UserEntryService;
 import com.salAce.journalApp.service.WeatherService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;// prettier
+
+@Tag(name = "Users APIs")
+@SecurityRequirement(name = "bearerAuth")
 
 @RestController
 @RequestMapping("/user")
@@ -58,19 +63,21 @@ public class UserController {
 
      }
 
-    } @PostMapping("/send-me-mail")
-
-    public ResponseEntity<?> mailBhejoReBaba(){
-     try{
-         userSchedular.fetchUserAndSendSaMail();
-         return new ResponseEntity<>(HttpStatus.OK) ;
-     }
-     catch (Exception e) {
-         log.error("error in sending the email"  +e) ;
-         return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
-     }
-
     }
+
+//    @PostMapping("/send-me-mail")
+//
+//    public ResponseEntity<?> mailBhejoReBaba(){
+//     try{
+//         userSchedular.fetchUserAndSendSaMail();
+//         return new ResponseEntity<>(HttpStatus.OK) ;
+//     }
+//     catch (Exception e) {
+//         log.error("error in sending the email"  +e) ;
+//         return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
+//     }
+//
+//    }
 
 
     @GetMapping

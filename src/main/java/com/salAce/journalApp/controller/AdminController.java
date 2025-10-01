@@ -1,7 +1,10 @@
 package com.salAce.journalApp.controller;
 
+import com.salAce.journalApp.entity.CreateAdminDTO;
 import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.service.UserEntryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,8 @@ import java.util.List;
 @RequestMapping("/admin")
 @Slf4j
 
+@Tag(name = "Admin APIs" , description = "Create Admin and see all users")
+@SecurityRequirement(name = "bearerAuth")
 public class AdminController {
 
     @Autowired
@@ -34,7 +39,7 @@ public class AdminController {
     }
 
     @PostMapping("/create-admin")
-    public ResponseEntity<?> createAdmin(@RequestBody User user){
+    public ResponseEntity<?> createAdmin(@RequestBody CreateAdminDTO user){
         try{
             userEntryService.saveAdmin(user);
 

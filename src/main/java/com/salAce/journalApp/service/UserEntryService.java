@@ -1,6 +1,7 @@
 package com.salAce.journalApp.service;
 
 import ch.qos.logback.core.encoder.EchoEncoder;
+import com.salAce.journalApp.entity.CreateAdminDTO;
 import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.repo.UserEntryRepo;
 import lombok.extern.flogger.Flogger;
@@ -52,10 +53,17 @@ public class UserEntryService {
         }
 
         }
-        public void saveAdmin(User user) {
-            user.setPassword(passEncoder.encode(user.getPassword()));
+        public void saveAdmin(CreateAdminDTO dtoUser) {
+            dtoUser.setPassword(passEncoder.encode(dtoUser.getPassword()));
             //get the pass ecode it and save the user in our database
+
+
+            User user = new User();
+            user.setUserName(dtoUser.getUserName());
+            user.setPassword(dtoUser.getPassword());
+
             user.setRoles(Arrays.asList("USER" , "ADMIN"));
+
             userEntryRepo.save(user);
         }
 
