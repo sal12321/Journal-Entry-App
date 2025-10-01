@@ -91,13 +91,7 @@ try{
 //
 //    }
 
-    @PostMapping("/send-mail")
-    public void mailBhejo(){
-//        emailService.sendEmail();
 
-
-
-    }
 
 
 

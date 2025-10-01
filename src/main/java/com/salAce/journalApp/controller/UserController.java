@@ -65,19 +65,19 @@ public class UserController {
 
     }
 
-//    @PostMapping("/send-me-mail")
-//
-//    public ResponseEntity<?> mailBhejoReBaba(){
-//     try{
-//         userSchedular.fetchUserAndSendSaMail();
-//         return new ResponseEntity<>(HttpStatus.OK) ;
-//     }
-//     catch (Exception e) {
-//         log.error("error in sending the email"  +e) ;
-//         return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
-//     }
-//
-//    }
+    @PostMapping("/send-me-mail")
+
+    public ResponseEntity<?> mailBhejoReBaba(){
+     try{
+         userSchedular.fetchUserAndSendSaMail();
+         return new ResponseEntity<>(HttpStatus.OK) ;
+     }
+     catch (Exception e) {
+         log.error("error in sending the email"  +e) ;
+         return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
+     }
+
+    }
 
 
     @GetMapping

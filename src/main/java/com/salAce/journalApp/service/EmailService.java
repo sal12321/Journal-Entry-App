@@ -2,10 +2,8 @@ package com.salAce.journalApp.service;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -31,9 +29,11 @@ public class EmailService {
             javaMailSender.send(mail) ;
         }
         catch(Exception e){
-            Logger log = null;
-            log.error("Exception occured while sending the email : " + e) ;
+
+            log.error("Exception occurred while sending the email : " + e) ;
         }
 
     }
+
+
 }
