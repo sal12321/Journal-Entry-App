@@ -5,6 +5,7 @@ import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.schedular.UserSchedular;
 import com.salAce.journalApp.service.UserEntryService;
 import com.salAce.journalApp.service.WeatherService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class UserController {
         @Autowired
         UserSchedular userSchedular ;
 
-
+    @Operation(summary = "User can update the userName and Password " )
         @PutMapping()
         public ResponseEntity<?> updateUser(@RequestBody User user ) {
          Authentication authentication = SecurityContextHolder.getContext().getAuthentication() ;
@@ -50,7 +51,9 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT) ;
 
         }
+
     @PostMapping("/create-user")
+    @Operation(summary = "User can create another user.")
     public ResponseEntity<?> createAdmin(@RequestBody User user){
      boolean created = userEntryService.saveNewEntry(user);
 
@@ -64,7 +67,7 @@ public class UserController {
      }
 
     }
-
+    @Operation(summary = "Hit me to get sentiment Analysis if opted." )
     @PostMapping("/send-me-mail")
 
     public ResponseEntity<?> mailBhejoReBaba(){
@@ -79,7 +82,7 @@ public class UserController {
 
     }
 
-
+    @Operation(summary = "Check weather of Gumla" )
     @GetMapping
     public ResponseEntity<?> greeting(){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -10,6 +10,7 @@ import com.salAce.journalApp.service.UserDetailsServiceImp;
 import com.salAce.journalApp.service.UserRepositoryImpl;
 import com.salAce.journalApp.service.UserEntryService;
 import com.salAce.journalApp.utils.JwtUtil;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class PublicController {
     private JwtUtil jwtUtils ;
 
     @GetMapping("/sa/users")
+    @Operation(summary = "See users who have opted for sentimentAnalysis")
     public ResponseEntity<?> check(){
 
         List<SAuser> foundUserForSA = userRepositoryImpl.getUsersForSA();

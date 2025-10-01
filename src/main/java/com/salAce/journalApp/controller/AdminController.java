@@ -2,7 +2,9 @@ package com.salAce.journalApp.controller;
 
 import com.salAce.journalApp.entity.CreateAdminDTO;
 import com.salAce.journalApp.entity.User;
+import com.salAce.journalApp.entity.UserDetailsVisibleToAdmin;
 import com.salAce.journalApp.service.UserEntryService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +29,9 @@ public class AdminController {
 
 
     @GetMapping("/all-users")
+    @Operation(summary = "See all users")
     public ResponseEntity<?> getAllUsers(){
-        List<User> all= userEntryService.getAll() ;
+        List<UserDetailsVisibleToAdmin> all= userEntryService.getAllUserToAdmin() ;
 
 
         if(all != null &&  !all.isEmpty()){

@@ -3,6 +3,7 @@ package com.salAce.journalApp.service;
 import ch.qos.logback.core.encoder.EchoEncoder;
 import com.salAce.journalApp.entity.CreateAdminDTO;
 import com.salAce.journalApp.entity.User;
+import com.salAce.journalApp.entity.UserDetailsVisibleToAdmin;
 import com.salAce.journalApp.repo.UserEntryRepo;
 import lombok.extern.flogger.Flogger;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +71,10 @@ public class UserEntryService {
 
         public List<User> getAll() {
             return userEntryRepo.findAll();
+
+        }
+        public List<UserDetailsVisibleToAdmin> getAllUserToAdmin() {
+            return userEntryRepo.findUserDetailsVisibleToAdmin();
 
         }
 
