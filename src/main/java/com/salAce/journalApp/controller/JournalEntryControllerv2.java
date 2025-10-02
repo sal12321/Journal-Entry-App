@@ -113,7 +113,7 @@ public class JournalEntryControllerv2 {
         boolean removed = journalEntryService.deleteById(myId, userName);
 
         if (removed) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
 
         } else {
 

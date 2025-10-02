@@ -75,7 +75,7 @@ try{
     UserDetails userDetails =
             userDetailsServiceImp .loadUserByUsername(user.getUserName()) ;
 
-   String jwt =  jwtUtils.generateToken(user.getUserName()) ;
+    String jwt =  jwtUtils.generateToken(user.getUserName()) ;
 
     return new ResponseEntity<>(jwt , HttpStatus.OK) ;
 
@@ -85,13 +85,6 @@ try{
          return new ResponseEntity<>(HttpStatus.BAD_REQUEST) ;
      }
 
-//    @PostMapping("/send-mail")
-//    public void mailBhejo(){
-//        emailService.sendEmail();
-//
-//
-//
-//    }
 
 
 

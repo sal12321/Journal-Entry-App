@@ -1,0 +1,2465 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Journal App</title>-->
+<!--    <style>-->
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+<!--            min-height: 100vh;-->
+<!--        }-->
+
+<!--        .navbar {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            padding: 20px 40px;-->
+<!--            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .logo {-->
+<!--            font-size: 1.8em;-->
+<!--            font-weight: bold;-->
+<!--            color: #667eea;-->
+<!--        }-->
+
+<!--        .nav-links {-->
+<!--            display: flex;-->
+<!--            gap: 30px;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .nav-links a {-->
+<!--            color: #333;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: 500;-->
+<!--            transition: color 0.3s;-->
+<!--        }-->
+
+<!--        .nav-links a:hover {-->
+<!--            color: #667eea;-->
+<!--        }-->
+
+<!--        .btn {-->
+<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px 25px;-->
+<!--            border-radius: 8px;-->
+<!--            cursor: pointer;-->
+<!--            transition: transform 0.2s, box-shadow 0.2s;-->
+<!--            font-weight: 600;-->
+<!--            font-size: 0.95em;-->
+<!--        }-->
+
+<!--        .btn:hover {-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);-->
+<!--        }-->
+
+<!--        .btn-outline {-->
+<!--            background: transparent;-->
+<!--            border: 2px solid #667eea;-->
+<!--            color: #667eea;-->
+<!--        }-->
+
+<!--        .btn-outline:hover {-->
+<!--            background: #667eea;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 1200px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 40px 20px;-->
+<!--        }-->
+
+<!--        .hidden {-->
+<!--            display: none;-->
+<!--        }-->
+
+<!--        /* Auth Section */-->
+<!--        .auth-container {-->
+<!--            max-width: 450px;-->
+<!--            margin: 60px auto;-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            padding: 40px;-->
+<!--            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);-->
+<!--        }-->
+
+<!--        .auth-title {-->
+<!--            color: #667eea;-->
+<!--            font-size: 2em;-->
+<!--            margin-bottom: 30px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .form-group {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        label {-->
+<!--            display: block;-->
+<!--            color: #333;-->
+<!--            font-weight: 600;-->
+<!--            margin-bottom: 8px;-->
+<!--        }-->
+
+<!--        input[type="text"],-->
+<!--        input[type="password"],-->
+<!--        input[type="email"],-->
+<!--        textarea {-->
+<!--            width: 100%;-->
+<!--            padding: 12px;-->
+<!--            border: 2px solid #e0e0e0;-->
+<!--            border-radius: 8px;-->
+<!--            font-size: 1em;-->
+<!--            font-family: inherit;-->
+<!--            transition: border-color 0.3s;-->
+<!--        }-->
+
+<!--        input:focus,-->
+<!--        textarea:focus {-->
+<!--            outline: none;-->
+<!--            border-color: #667eea;-->
+<!--        }-->
+
+<!--        textarea {-->
+<!--            min-height: 150px;-->
+<!--            resize: vertical;-->
+<!--        }-->
+
+<!--        select {-->
+<!--            width: 100%;-->
+<!--            padding: 12px;-->
+<!--            border: 2px solid #e0e0e0;-->
+<!--            border-radius: 8px;-->
+<!--            font-size: 1em;-->
+<!--            font-family: inherit;-->
+<!--            background: white;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        .btn-full {-->
+<!--            width: 100%;-->
+<!--            padding: 14px;-->
+<!--            font-size: 1.1em;-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+
+<!--        .auth-switch {-->
+<!--            text-align: center;-->
+<!--            margin-top: 20px;-->
+<!--            color: #666;-->
+<!--        }-->
+
+<!--        .auth-switch a {-->
+<!--            color: #667eea;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: 600;-->
+<!--        }-->
+
+<!--        .checkbox-group {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            gap: 10px;-->
+<!--        }-->
+
+<!--        .checkbox-group input[type="checkbox"] {-->
+<!--            width: auto;-->
+<!--        }-->
+
+<!--        /* Journal Section */-->
+<!--        .journal-header {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            padding: 30px;-->
+<!--            margin-bottom: 30px;-->
+<!--            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .journal-header h1 {-->
+<!--            color: #667eea;-->
+<!--            font-size: 2.5em;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .user-info {-->
+<!--            color: #666;-->
+<!--            font-size: 1.1em;-->
+<!--        }-->
+
+<!--        .journal-actions {-->
+<!--            display: flex;-->
+<!--            gap: 15px;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .entry-form-container {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            padding: 40px;-->
+<!--            margin-bottom: 30px;-->
+<!--            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .entries-grid {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));-->
+<!--            gap: 25px;-->
+<!--        }-->
+
+<!--        .entry-card {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 15px;-->
+<!--            padding: 25px;-->
+<!--            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);-->
+<!--            transition: transform 0.2s, box-shadow 0.2s;-->
+<!--            position: relative;-->
+<!--        }-->
+
+<!--        .entry-card:hover {-->
+<!--            transform: translateY(-5px);-->
+<!--            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);-->
+<!--        }-->
+
+<!--        .entry-title {-->
+<!--            color: #667eea;-->
+<!--            font-size: 1.4em;-->
+<!--            font-weight: 600;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .entry-date {-->
+<!--            color: #999;-->
+<!--            font-size: 0.9em;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .entry-content {-->
+<!--            color: #333;-->
+<!--            line-height: 1.6;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .sentiment-badge {-->
+<!--            display: inline-block;-->
+<!--            padding: 5px 15px;-->
+<!--            border-radius: 20px;-->
+<!--            font-size: 0.85em;-->
+<!--            font-weight: 600;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .sentiment-HAPPY {-->
+<!--            background: #d4edda;-->
+<!--            color: #155724;-->
+<!--        }-->
+
+<!--        .sentiment-SAD {-->
+<!--            background: #cce5ff;-->
+<!--            color: #004085;-->
+<!--        }-->
+
+<!--        .sentiment-ANGRY {-->
+<!--            background: #f8d7da;-->
+<!--            color: #721c24;-->
+<!--        }-->
+
+<!--        .sentiment-ANXIOUS {-->
+<!--            background: #fff3cd;-->
+<!--            color: #856404;-->
+<!--        }-->
+
+<!--        .entry-actions {-->
+<!--            display: flex;-->
+<!--            gap: 10px;-->
+<!--        }-->
+
+<!--        .btn-small {-->
+<!--            padding: 8px 15px;-->
+<!--            font-size: 0.9em;-->
+<!--        }-->
+
+<!--        .btn-danger {-->
+<!--            background: #dc3545;-->
+<!--        }-->
+
+<!--        .btn-danger:hover {-->
+<!--            background: #c82333;-->
+<!--        }-->
+
+<!--        .no-entries {-->
+<!--            text-align: center;-->
+<!--            padding: 60px 20px;-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            color: #999;-->
+<!--            font-size: 1.2em;-->
+<!--        }-->
+
+<!--        .error {-->
+<!--            background: #f8d7da;-->
+<!--            color: #721c24;-->
+<!--            padding: 15px;-->
+<!--            border-radius: 8px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .success {-->
+<!--            background: #d4edda;-->
+<!--            color: #155724;-->
+<!--            padding: 15px;-->
+<!--            border-radius: 8px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .modal {-->
+<!--            display: none;-->
+<!--            position: fixed;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background: rgba(0, 0, 0, 0.7);-->
+<!--            z-index: 1000;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .modal.active {-->
+<!--            display: flex;-->
+<!--        }-->
+
+<!--        .modal-content {-->
+<!--            background: white;-->
+<!--            border-radius: 20px;-->
+<!--            padding: 40px;-->
+<!--            max-width: 600px;-->
+<!--            width: 90%;-->
+<!--            max-height: 80vh;-->
+<!--            overflow-y: auto;-->
+<!--        }-->
+
+<!--        .modal-header {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .modal-title {-->
+<!--            color: #667eea;-->
+<!--            font-size: 1.8em;-->
+<!--            font-weight: 600;-->
+<!--        }-->
+
+<!--        .close-btn {-->
+<!--            background: none;-->
+<!--            border: none;-->
+<!--            font-size: 2em;-->
+<!--            color: #999;-->
+<!--            cursor: pointer;-->
+<!--            line-height: 1;-->
+<!--        }-->
+
+<!--        .close-btn:hover {-->
+<!--            color: #333;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <nav class="navbar">-->
+<!--        <div class="logo">📔 Journal App</div>-->
+<!--        <div class="nav-links" id="navLinks">-->
+<!--            <span id="welcomeText"></span>-->
+<!--            <button class="btn btn-outline" onclick="logout()" id="logoutBtn" style="display: none;">Logout</button>-->
+<!--        </div>-->
+<!--    </nav>-->
+
+<!--    &lt;!&ndash; Login Section &ndash;&gt;-->
+<!--    <div id="loginSection" class="auth-container">-->
+<!--        <h2 class="auth-title">Welcome Back</h2>-->
+<!--        <div id="loginError" class="error hidden"></div>-->
+<!--        <form onsubmit="login(event)">-->
+<!--            <div class="form-group">-->
+<!--                <label for="loginUsername">Username</label>-->
+<!--                <input type="text" id="loginUsername" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="loginPassword">Password</label>-->
+<!--                <input type="password" id="loginPassword" required>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-full">Login</button>-->
+<!--        </form>-->
+<!--        <div class="auth-switch">-->
+<!--            Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Signup Section &ndash;&gt;-->
+<!--    <div id="signupSection" class="auth-container hidden">-->
+<!--        <h2 class="auth-title">Create Account</h2>-->
+<!--        <div id="signupError" class="error hidden"></div>-->
+<!--        <form onsubmit="signup(event)">-->
+<!--            <div class="form-group">-->
+<!--                <label for="signupUsername">Username</label>-->
+<!--                <input type="text" id="signupUsername" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="signupEmail">Email</label>-->
+<!--                <input type="email" id="signupEmail" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="signupPassword">Password</label>-->
+<!--                <input type="password" id="signupPassword" required>-->
+<!--            </div>-->
+<!--            <div class="form-group checkbox-group">-->
+<!--                <input type="checkbox" id="sentimentAnalysis">-->
+<!--                <label for="sentimentAnalysis" style="margin-bottom: 0;">Enable Sentiment Analysis</label>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-full">Sign Up</button>-->
+<!--        </form>-->
+<!--        <div class="auth-switch">-->
+<!--            Already have an account? <a href="#" onclick="showLogin()">Login</a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Journal Section &ndash;&gt;-->
+<!--    <div id="journalSection" class="container hidden">-->
+<!--        <div class="journal-header">-->
+<!--            <h1>My Journal</h1>-->
+<!--            <p class="user-info" id="userInfo"></p>-->
+<!--            <div class="journal-actions">-->
+<!--                <button class="btn" onclick="showNewEntryModal()">✍️ New Entry</button>-->
+<!--                <button class="btn btn-outline" onclick="sendSentimentEmail()">📧 Get Sentiment Report</button>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div id="journalEntries" class="entries-grid"></div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; New Entry Modal &ndash;&gt;-->
+<!--    <div id="newEntryModal" class="modal">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h2 class="modal-title">New Journal Entry</h2>-->
+<!--                <button class="close-btn" onclick="closeNewEntryModal()">&times;</button>-->
+<!--            </div>-->
+<!--            <div id="entryError" class="error hidden"></div>-->
+<!--            <form onsubmit="createEntry(event)">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="entryTitle">Title</label>-->
+<!--                    <input type="text" id="entryTitle" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="entryContent">Content</label>-->
+<!--                    <textarea id="entryContent" required></textarea>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="entrySentiment">Sentiment (Optional)</label>-->
+<!--                    <select id="entrySentiment">-->
+<!--                        <option value="">Select sentiment...</option>-->
+<!--                        <option value="HAPPY">😊 Happy</option>-->
+<!--                        <option value="SAD">😢 Sad</option>-->
+<!--                        <option value="ANGRY">😠 Angry</option>-->
+<!--                        <option value="ANXIOUS">😰 Anxious</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-full">Save Entry</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Edit Entry Modal &ndash;&gt;-->
+<!--    <div id="editEntryModal" class="modal">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h2 class="modal-title">Edit Journal Entry</h2>-->
+<!--                <button class="close-btn" onclick="closeEditEntryModal()">&times;</button>-->
+<!--            </div>-->
+<!--            <div id="editEntryError" class="error hidden"></div>-->
+<!--            <form onsubmit="updateEntry(event)">-->
+<!--                <input type="hidden" id="editEntryId">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="editEntryTitle">Title</label>-->
+<!--                    <input type="text" id="editEntryTitle" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="editEntryContent">Content</label>-->
+<!--                    <textarea id="editEntryContent" required></textarea>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="editEntrySentiment">Sentiment (Optional)</label>-->
+<!--                    <select id="editEntrySentiment">-->
+<!--                        <option value="">Select sentiment...</option>-->
+<!--                        <option value="HAPPY">😊 Happy</option>-->
+<!--                        <option value="SAD">😢 Sad</option>-->
+<!--                        <option value="ANGRY">😠 Angry</option>-->
+<!--                        <option value="ANXIOUS">😰 Anxious</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-full">Update Entry</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <script>-->
+<!--        const API_URL = 'http://localhost:8080';-->
+
+<!--        let authToken = '';-->
+<!--        let currentUser = {};-->
+
+<!--        function showError(elementId, message) {-->
+<!--            const el = document.getElementById(elementId);-->
+<!--            el.textContent = message;-->
+<!--            el.classList.remove('hidden');-->
+<!--            setTimeout(() => el.classList.add('hidden'), 5000);-->
+<!--        }-->
+
+<!--        function showSuccess(message) {-->
+<!--            alert(message);-->
+<!--        }-->
+
+<!--        function showLogin() {-->
+<!--            document.getElementById('loginSection').classList.remove('hidden');-->
+<!--            document.getElementById('signupSection').classList.add('hidden');-->
+<!--        }-->
+
+<!--        function showSignup() {-->
+<!--            document.getElementById('loginSection').classList.add('hidden');-->
+<!--            document.getElementById('signupSection').classList.remove('hidden');-->
+<!--        }-->
+
+<!--        async function login(e) {-->
+<!--            e.preventDefault();-->
+<!--            const userName = document.getElementById('loginUsername').value;-->
+<!--            const password = document.getElementById('loginPassword').value;-->
+
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/public/login`, {-->
+<!--                    method: 'POST',-->
+<!--                    headers: { 'Content-Type': 'application/json' },-->
+<!--                    body: JSON.stringify({ userName, password })-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                console.log("in login function") ;-->
+
+
+<!--                    const data = await response.json();-->
+<!--                    console.log("data\n") ;-->
+<!--                    console.log(data) ;-->
+<!--                    authToken = data.token || data.jwt || data.accessToken;-->
+<!--                    console.log("token") ;-->
+<!--                    console.log(authToken) ;-->
+<!--                    currentUser = { userName };-->
+<!--                    document.getElementById('loginSection').classList.add('hidden');-->
+<!--                    document.getElementById('journalSection').classList.remove('hidden');-->
+<!--                    document.getElementById('logoutBtn').style.display = 'block';-->
+<!--                    document.getElementById('welcomeText').textContent = `Welcome, ${userName}!`;-->
+<!--                    console.log("now loading entries") ;-->
+<!--                    loadJournalEntries();-->
+<!--                } else {-->
+<!--                    showError('loginError', 'Invalid username or password');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                showError('loginError', 'Login failed. Please try again.');-->
+<!--            }-->
+<!--        }-->
+
+<!--        async function signup(e) {-->
+<!--            e.preventDefault();-->
+<!--            const userName = document.getElementById('signupUsername').value;-->
+<!--            const email = document.getElementById('signupEmail').value;-->
+<!--            const password = document.getElementById('signupPassword').value;-->
+<!--            const sentimentAnalysis = document.getElementById('sentimentAnalysis').checked;-->
+
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/public/signup`, {-->
+<!--                    method: 'POST',-->
+<!--                    headers: { 'Content-Type': 'application/json' },-->
+<!--                    body: JSON.stringify({ userName, email, password, sentimentAnalysis })-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                    showSuccess('Account created successfully! Please login.');-->
+<!--                    showLogin();-->
+<!--                } else {-->
+<!--                    showError('signupError', 'Signup failed. Username might be taken.');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                showError('signupError', 'Signup failed. Please try again.');-->
+<!--            }-->
+<!--        }-->
+
+<!--        function logout() {-->
+<!--            authToken = '';-->
+<!--            currentUser = {};-->
+<!--            document.getElementById('journalSection').classList.add('hidden');-->
+<!--            document.getElementById('loginSection').classList.remove('hidden');-->
+<!--            document.getElementById('logoutBtn').style.display = 'none';-->
+<!--            document.getElementById('welcomeText').textContent = '';-->
+<!--        }-->
+
+<!--        async function loadJournalEntries() {-->
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/journal`, {-->
+<!--                    headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                    const entries = await response.json();-->
+<!--                    displayEntries(entries);-->
+<!--                } else {-->
+<!--                    showError('entryError', 'Failed to load entries');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                console.error('Error loading entries:', error);-->
+<!--            }-->
+<!--        }-->
+
+<!--        function displayEntries(entries) {-->
+<!--            const container = document.getElementById('journalEntries');-->
+<!--            -->
+<!--            if (!entries || entries.length === 0) {-->
+<!--                container.innerHTML = '<div class="no-entries">No entries yet. Create your first journal entry!</div>';-->
+<!--                return;-->
+<!--            }-->
+
+<!--            container.innerHTML = entries.map(entry => `-->
+<!--                <div class="entry-card">-->
+<!--                    <div class="entry-title">${entry.title}</div>-->
+<!--                    <div class="entry-date">${new Date(entry.date).toLocaleDateString('en-US', { -->
+<!--                        year: 'numeric', -->
+<!--                        month: 'long', -->
+<!--                        day: 'numeric',-->
+<!--                        hour: '2-digit',-->
+<!--                        minute: '2-digit'-->
+<!--                    })}</div>-->
+<!--                    ${entry.sentiment ? `<span class="sentiment-badge sentiment-${entry.sentiment}">${entry.sentiment}</span>` : ''}-->
+<!--                    <div class="entry-content">${entry.content}</div>-->
+<!--                    <div class="entry-actions">-->
+<!--                        <button class="btn btn-small" onclick="editEntry('${entry.id.timestamp}', '${entry.id.date}')">Edit</button>-->
+<!--                        <button class="btn btn-small btn-danger" onclick="deleteEntry('${entry.id.timestamp}', '${entry.id.date}')">Delete</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            `).join('');-->
+<!--        }-->
+
+<!--        function showNewEntryModal() {-->
+<!--            document.getElementById('newEntryModal').classList.add('active');-->
+<!--        }-->
+
+<!--        function closeNewEntryModal() {-->
+<!--            document.getElementById('newEntryModal').classList.remove('active');-->
+<!--            document.getElementById('entryTitle').value = '';-->
+<!--            document.getElementById('entryContent').value = '';-->
+<!--            document.getElementById('entrySentiment').value = '';-->
+<!--        }-->
+
+<!--        async function createEntry(e) {-->
+<!--            e.preventDefault();-->
+<!--            const title = document.getElementById('entryTitle').value;-->
+<!--            const content = document.getElementById('entryContent').value;-->
+<!--            const sentiment = document.getElementById('entrySentiment').value;-->
+
+<!--            const entry = { title, content };-->
+<!--            if (sentiment) entry.sentiment = sentiment;-->
+
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/journal`, {-->
+<!--                    method: 'POST',-->
+<!--                    headers: {-->
+<!--                        'Content-Type': 'application/json',-->
+<!--                        'Authorization': `Bearer ${authToken}`-->
+<!--                    },-->
+<!--                    body: JSON.stringify(entry)-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                    closeNewEntryModal();-->
+<!--                    showSuccess('Entry created successfully!');-->
+<!--                    loadJournalEntries();-->
+<!--                } else {-->
+<!--                    showError('entryError', 'Failed to create entry');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                showError('entryError', 'Failed to create entry');-->
+<!--            }-->
+<!--        }-->
+
+<!--        function closeEditEntryModal() {-->
+<!--            document.getElementById('editEntryModal').classList.remove('active');-->
+<!--        }-->
+
+<!--        async function editEntry(timestamp, date) {-->
+<!--            const entryId = { timestamp: parseInt(timestamp), date: date };-->
+<!--            -->
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {-->
+<!--                    headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                    const entry = await response.json();-->
+<!--                    document.getElementById('editEntryId').value = JSON.stringify(entryId);-->
+<!--                    document.getElementById('editEntryTitle').value = entry.title;-->
+<!--                    document.getElementById('editEntryContent').value = entry.content;-->
+<!--                    document.getElementById('editEntrySentiment').value = entry.sentiment || '';-->
+<!--                    document.getElementById('editEntryModal').classList.add('active');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                showError('editEntryError', 'Failed to load entry');-->
+<!--            }-->
+<!--        }-->
+
+<!--        async function updateEntry(e) {-->
+<!--            e.preventDefault();-->
+<!--            const entryId = JSON.parse(document.getElementById('editEntryId').value);-->
+<!--            const title = document.getElementById('editEntryTitle').value;-->
+<!--            const content = document.getElementById('editEntryContent').value;-->
+<!--            const sentiment = document.getElementById('editEntrySentiment').value;-->
+
+<!--            const entry = { title, content };-->
+<!--            if (sentiment) entry.sentiment = sentiment;-->
+
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {-->
+<!--                    method: 'PUT',-->
+<!--                    headers: {-->
+<!--                        'Content-Type': 'application/json',-->
+<!--                        'Authorization': `Bearer ${authToken}`-->
+<!--                    },-->
+<!--                    body: JSON.stringify(entry)-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                    closeEditEntryModal();-->
+<!--                    showSuccess('Entry updated successfully!');-->
+<!--                    loadJournalEntries();-->
+<!--                } else {-->
+<!--                    showError('editEntryError', 'Failed to update entry');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                showError('editEntryError', 'Failed to update entry');-->
+<!--            }-->
+<!--        }-->
+
+<!--        async function deleteEntry(timestamp, date) {-->
+<!--            if (!confirm('Are you sure you want to delete this entry?')) return;-->
+
+<!--            const entryId = { timestamp: parseInt(timestamp), date: date };-->
+
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {-->
+<!--                    method: 'DELETE',-->
+<!--                    headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                    showSuccess('Entry deleted successfully!');-->
+<!--                    loadJournalEntries();-->
+<!--                } else {-->
+<!--                    alert('Failed to delete entry');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                alert('Failed to delete entry');-->
+<!--            }-->
+<!--        }-->
+
+<!--        async function sendSentimentEmail() {-->
+<!--            try {-->
+<!--                const response = await fetch(`${API_URL}/user/send-me-mail`, {-->
+<!--                    method: 'POST',-->
+<!--                    headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--                });-->
+
+<!--                if (response.ok) {-->
+<!--                    showSuccess('Sentiment report sent to your email!');-->
+<!--                } else {-->
+<!--                    alert('Failed to send sentiment report');-->
+<!--                }-->
+<!--            } catch (error) {-->
+<!--                alert('Failed to send sentiment report');-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Journal App</title>-->
+<!--    <style>-->
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+<!--            min-height: 100vh;-->
+<!--        }-->
+
+<!--        .navbar {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            padding: 20px 40px;-->
+<!--            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .logo {-->
+<!--            font-size: 1.8em;-->
+<!--            font-weight: bold;-->
+<!--            color: #667eea;-->
+<!--        }-->
+
+<!--        .nav-links {-->
+<!--            display: flex;-->
+<!--            gap: 30px;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .nav-links a {-->
+<!--            color: #333;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: 500;-->
+<!--            transition: color 0.3s;-->
+<!--        }-->
+
+<!--        .nav-links a:hover {-->
+<!--            color: #667eea;-->
+<!--        }-->
+
+<!--        .btn {-->
+<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px 25px;-->
+<!--            border-radius: 8px;-->
+<!--            cursor: pointer;-->
+<!--            transition: transform 0.2s, box-shadow 0.2s;-->
+<!--            font-weight: 600;-->
+<!--            font-size: 0.95em;-->
+<!--        }-->
+
+<!--        .btn:hover {-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);-->
+<!--        }-->
+
+<!--        .btn-outline {-->
+<!--            background: transparent;-->
+<!--            border: 2px solid #667eea;-->
+<!--            color: #667eea;-->
+<!--        }-->
+
+<!--        .btn-outline:hover {-->
+<!--            background: #667eea;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 1200px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 40px 20px;-->
+<!--        }-->
+
+<!--        .hidden {-->
+<!--            display: none;-->
+<!--        }-->
+
+<!--        /* Auth Section */-->
+<!--        .auth-container {-->
+<!--            max-width: 450px;-->
+<!--            margin: 60px auto;-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            padding: 40px;-->
+<!--            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);-->
+<!--        }-->
+
+<!--        .auth-title {-->
+<!--            color: #667eea;-->
+<!--            font-size: 2em;-->
+<!--            margin-bottom: 30px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .form-group {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        label {-->
+<!--            display: block;-->
+<!--            color: #333;-->
+<!--            font-weight: 600;-->
+<!--            margin-bottom: 8px;-->
+<!--        }-->
+
+<!--        input[type="text"],-->
+<!--        input[type="password"],-->
+<!--        input[type="email"],-->
+<!--        textarea {-->
+<!--            width: 100%;-->
+<!--            padding: 12px;-->
+<!--            border: 2px solid #e0e0e0;-->
+<!--            border-radius: 8px;-->
+<!--            font-size: 1em;-->
+<!--            font-family: inherit;-->
+<!--            transition: border-color 0.3s;-->
+<!--        }-->
+
+<!--        input:focus,-->
+<!--        textarea:focus {-->
+<!--            outline: none;-->
+<!--            border-color: #667eea;-->
+<!--        }-->
+
+<!--        textarea {-->
+<!--            min-height: 150px;-->
+<!--            resize: vertical;-->
+<!--        }-->
+
+<!--        select {-->
+<!--            width: 100%;-->
+<!--            padding: 12px;-->
+<!--            border: 2px solid #e0e0e0;-->
+<!--            border-radius: 8px;-->
+<!--            font-size: 1em;-->
+<!--            font-family: inherit;-->
+<!--            background: white;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        .btn-full {-->
+<!--            width: 100%;-->
+<!--            padding: 14px;-->
+<!--            font-size: 1.1em;-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+
+<!--        .auth-switch {-->
+<!--            text-align: center;-->
+<!--            margin-top: 20px;-->
+<!--            color: #666;-->
+<!--        }-->
+
+<!--        .auth-switch a {-->
+<!--            color: #667eea;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: 600;-->
+<!--        }-->
+
+<!--        .checkbox-group {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            gap: 10px;-->
+<!--        }-->
+
+<!--        .checkbox-group input[type="checkbox"] {-->
+<!--            width: auto;-->
+<!--        }-->
+
+<!--        /* Journal Section */-->
+<!--        .journal-header {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            padding: 30px;-->
+<!--            margin-bottom: 30px;-->
+<!--            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .journal-header h1 {-->
+<!--            color: #667eea;-->
+<!--            font-size: 2.5em;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .user-info {-->
+<!--            color: #666;-->
+<!--            font-size: 1.1em;-->
+<!--        }-->
+
+<!--        .journal-actions {-->
+<!--            display: flex;-->
+<!--            gap: 15px;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .entry-form-container {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            padding: 40px;-->
+<!--            margin-bottom: 30px;-->
+<!--            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .entries-grid {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));-->
+<!--            gap: 25px;-->
+<!--        }-->
+
+<!--        .entry-card {-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 15px;-->
+<!--            padding: 25px;-->
+<!--            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);-->
+<!--            transition: transform 0.2s, box-shadow 0.2s;-->
+<!--            position: relative;-->
+<!--        }-->
+
+<!--        .entry-card:hover {-->
+<!--            transform: translateY(-5px);-->
+<!--            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);-->
+<!--        }-->
+
+<!--        .entry-title {-->
+<!--            color: #667eea;-->
+<!--            font-size: 1.4em;-->
+<!--            font-weight: 600;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .entry-date {-->
+<!--            color: #999;-->
+<!--            font-size: 0.9em;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .entry-content {-->
+<!--            color: #333;-->
+<!--            line-height: 1.6;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .sentiment-badge {-->
+<!--            display: inline-block;-->
+<!--            padding: 5px 15px;-->
+<!--            border-radius: 20px;-->
+<!--            font-size: 0.85em;-->
+<!--            font-weight: 600;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .sentiment-HAPPY {-->
+<!--            background: #d4edda;-->
+<!--            color: #155724;-->
+<!--        }-->
+
+<!--        .sentiment-SAD {-->
+<!--            background: #cce5ff;-->
+<!--            color: #004085;-->
+<!--        }-->
+
+<!--        .sentiment-ANGRY {-->
+<!--            background: #f8d7da;-->
+<!--            color: #721c24;-->
+<!--        }-->
+
+<!--        .sentiment-ANXIOUS {-->
+<!--            background: #fff3cd;-->
+<!--            color: #856404;-->
+<!--        }-->
+
+<!--        .entry-actions {-->
+<!--            display: flex;-->
+<!--            gap: 10px;-->
+<!--        }-->
+
+<!--        .btn-small {-->
+<!--            padding: 8px 15px;-->
+<!--            font-size: 0.9em;-->
+<!--        }-->
+
+<!--        .btn-danger {-->
+<!--            background: #dc3545;-->
+<!--        }-->
+
+<!--        .btn-danger:hover {-->
+<!--            background: #c82333;-->
+<!--        }-->
+
+<!--        .no-entries {-->
+<!--            text-align: center;-->
+<!--            padding: 60px 20px;-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            color: #999;-->
+<!--            font-size: 1.2em;-->
+<!--        }-->
+
+<!--        .error {-->
+<!--            background: #f8d7da;-->
+<!--            color: #721c24;-->
+<!--            padding: 15px;-->
+<!--            border-radius: 8px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .success {-->
+<!--            background: #d4edda;-->
+<!--            color: #155724;-->
+<!--            padding: 15px;-->
+<!--            border-radius: 8px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .modal {-->
+<!--            display: none;-->
+<!--            position: fixed;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background: rgba(0, 0, 0, 0.7);-->
+<!--            z-index: 1000;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .modal.active {-->
+<!--            display: flex;-->
+<!--        }-->
+
+<!--        .modal-content {-->
+<!--            background: white;-->
+<!--            border-radius: 20px;-->
+<!--            padding: 40px;-->
+<!--            max-width: 600px;-->
+<!--            width: 90%;-->
+<!--            max-height: 80vh;-->
+<!--            overflow-y: auto;-->
+<!--        }-->
+
+<!--        .modal-header {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .modal-title {-->
+<!--            color: #667eea;-->
+<!--            font-size: 1.8em;-->
+<!--            font-weight: 600;-->
+<!--        }-->
+
+<!--        .close-btn {-->
+<!--            background: none;-->
+<!--            border: none;-->
+<!--            font-size: 2em;-->
+<!--            color: #999;-->
+<!--            cursor: pointer;-->
+<!--            line-height: 1;-->
+<!--        }-->
+
+<!--        .close-btn:hover {-->
+<!--            color: #333;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav class="navbar">-->
+<!--    <div class="logo">📔 Journal App</div>-->
+<!--    <div class="nav-links" id="navLinks">-->
+<!--        <span id="welcomeText"></span>-->
+<!--        <button class="btn btn-outline" onclick="logout()" id="logoutBtn" style="display: none;">Logout</button>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--&lt;!&ndash; Login Section &ndash;&gt;-->
+<!--<div id="loginSection" class="auth-container">-->
+<!--    <h2 class="auth-title">Welcome Back</h2>-->
+<!--    <div id="loginError" class="error hidden"></div>-->
+<!--    <form onsubmit="login(event)">-->
+<!--        <div class="form-group">-->
+<!--            <label for="loginUsername">Username</label>-->
+<!--            <input type="text" id="loginUsername" required>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="loginPassword">Password</label>-->
+<!--            <input type="password" id="loginPassword" required>-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-full">Login</button>-->
+<!--    </form>-->
+<!--    <div class="auth-switch">-->
+<!--        Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Signup Section &ndash;&gt;-->
+<!--<div id="signupSection" class="auth-container hidden">-->
+<!--    <h2 class="auth-title">Create Account</h2>-->
+<!--    <div id="signupError" class="error hidden"></div>-->
+<!--    <form onsubmit="signup(event)">-->
+<!--        <div class="form-group">-->
+<!--            <label for="signupUsername">Username</label>-->
+<!--            <input type="text" id="signupUsername" required>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="signupEmail">Email</label>-->
+<!--            <input type="email" id="signupEmail" required>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="signupPassword">Password</label>-->
+<!--            <input type="password" id="signupPassword" required>-->
+<!--        </div>-->
+<!--        <div class="form-group checkbox-group">-->
+<!--            <input type="checkbox" id="sentimentAnalysis">-->
+<!--            <label for="sentimentAnalysis" style="margin-bottom: 0;">Enable Sentiment Analysis</label>-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-full">Sign Up</button>-->
+<!--    </form>-->
+<!--    <div class="auth-switch">-->
+<!--        Already have an account? <a href="#" onclick="showLogin()">Login</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Journal Section &ndash;&gt;-->
+<!--<div id="journalSection" class="container hidden">-->
+<!--    <div class="journal-header">-->
+<!--        <h1>My Journal</h1>-->
+<!--        <p class="user-info" id="userInfo"></p>-->
+<!--        <div class="journal-actions">-->
+<!--            <button class="btn" onclick="showNewEntryModal()">✍️ New Entry</button>-->
+<!--            <button class="btn btn-outline" onclick="sendSentimentEmail()">📧 Get Sentiment Report</button>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div id="journalEntries" class="entries-grid"></div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; New Entry Modal &ndash;&gt;-->
+<!--<div id="newEntryModal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--            <h2 class="modal-title">New Journal Entry</h2>-->
+<!--            <button class="close-btn" onclick="closeNewEntryModal()">&times;</button>-->
+<!--        </div>-->
+<!--        <div id="entryError" class="error hidden"></div>-->
+<!--        <form onsubmit="createEntry(event)">-->
+<!--            <div class="form-group">-->
+<!--                <label for="entryTitle">Title</label>-->
+<!--                <input type="text" id="entryTitle" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="entryContent">Content</label>-->
+<!--                <textarea id="entryContent" required></textarea>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="entrySentiment">Sentiment (Optional)</label>-->
+<!--                <select id="entrySentiment">-->
+<!--                    <option value="">Select sentiment...</option>-->
+<!--                    <option value="HAPPY">😊 Happy</option>-->
+<!--                    <option value="SAD">😢 Sad</option>-->
+<!--                    <option value="ANGRY">😠 Angry</option>-->
+<!--                    <option value="ANXIOUS">😰 Anxious</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-full">Save Entry</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Edit Entry Modal &ndash;&gt;-->
+<!--<div id="editEntryModal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--            <h2 class="modal-title">Edit Journal Entry</h2>-->
+<!--            <button class="close-btn" onclick="closeEditEntryModal()">&times;</button>-->
+<!--        </div>-->
+<!--        <div id="editEntryError" class="error hidden"></div>-->
+<!--        <form onsubmit="updateEntry(event)">-->
+<!--            <input type="hidden" id="editEntryId">-->
+<!--            <div class="form-group">-->
+<!--                <label for="editEntryTitle">Title</label>-->
+<!--                <input type="text" id="editEntryTitle" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="editEntryContent">Content</label>-->
+<!--                <textarea id="editEntryContent" required></textarea>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="editEntrySentiment">Sentiment (Optional)</label>-->
+<!--                <select id="editEntrySentiment">-->
+<!--                    <option value="">Select sentiment...</option>-->
+<!--                    <option value="HAPPY">😊 Happy</option>-->
+<!--                    <option value="SAD">😢 Sad</option>-->
+<!--                    <option value="ANGRY">😠 Angry</option>-->
+<!--                    <option value="ANXIOUS">😰 Anxious</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-full">Update Entry</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    const API_URL = 'http://localhost:8080';-->
+<!--    let authToken = '';-->
+<!--    let currentUser = {};-->
+
+<!--    // Helper function to log API calls for debugging-->
+<!--    function logAPICall(method, endpoint, data = null) {-->
+<!--        console.log('=== API CALL ===');-->
+<!--        console.log('Method:', method);-->
+<!--        console.log('URL:', `${API_URL}${endpoint}`);-->
+<!--        if (data) console.log('Body:', JSON.stringify(data, null, 2));-->
+<!--        if (authToken) console.log('Token:', authToken.substring(0, 20) + '...');-->
+<!--        console.log('===============');-->
+<!--    }-->
+
+<!--    function showError(elementId, message) {-->
+<!--        const el = document.getElementById(elementId);-->
+<!--        el.textContent = message;-->
+<!--        el.classList.remove('hidden');-->
+<!--        setTimeout(() => el.classList.add('hidden'), 5000);-->
+<!--    }-->
+
+<!--    function showSuccess(message) {-->
+<!--        alert(message);-->
+<!--    }-->
+
+<!--    function showLogin() {-->
+<!--        document.getElementById('loginSection').classList.remove('hidden');-->
+<!--        document.getElementById('signupSection').classList.add('hidden');-->
+<!--    }-->
+
+<!--    function showSignup() {-->
+<!--        document.getElementById('loginSection').classList.add('hidden');-->
+<!--        document.getElementById('signupSection').classList.remove('hidden');-->
+<!--    }-->
+
+<!--    async function login(e) {-->
+<!--        e.preventDefault();-->
+<!--        const userName = document.getElementById('loginUsername').value;-->
+<!--        const password = document.getElementById('loginPassword').value;-->
+
+<!--        const requestData = { userName, password };-->
+<!--        logAPICall('POST', '/public/login', requestData);-->
+
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/public/login`, {-->
+<!--                method: 'POST',-->
+<!--                headers: { 'Content-Type': 'application/json' },-->
+<!--                body: JSON.stringify(requestData)-->
+<!--            });-->
+
+<!--            console.log('Response status:', response.status);-->
+<!--            console.log('Response headers:', response.headers);-->
+
+<!--            // Get the raw response text first-->
+<!--            const responseText = await response.text();-->
+<!--            console.log('Raw response text:', responseText);-->
+
+<!--            if (response.ok) {-->
+<!--                // Try to parse JSON-->
+<!--                let data;-->
+<!--                try {-->
+<!--                    data = JSON.parse(responseText);-->
+<!--                    console.log('Parsed JSON data:', data);-->
+<!--                } catch (e) {-->
+<!--                    console.error('Failed to parse JSON:', e);-->
+<!--                    // If response is just a token string (not JSON object)-->
+<!--                    authToken = responseText.trim();-->
+<!--                    console.log('Using response as token directly:', authToken);-->
+
+<!--                    currentUser = { userName };-->
+<!--                    document.getElementById('loginSection').classList.add('hidden');-->
+<!--                    document.getElementById('journalSection').classList.remove('hidden');-->
+<!--                    document.getElementById('logoutBtn').style.display = 'block';-->
+<!--                    document.getElementById('welcomeText').textContent = `Welcome, ${userName}!`;-->
+<!--                    loadJournalEntries();-->
+<!--                    return;-->
+<!--                }-->
+
+<!--                // Try different possible token field names-->
+<!--                authToken = data.token || data.jwt || data.accessToken || data.bearerToken || data;-->
+<!--                console.log('Saved token:', authToken);-->
+
+<!--                currentUser = { userName };-->
+<!--                document.getElementById('loginSection').classList.add('hidden');-->
+<!--                document.getElementById('journalSection').classList.remove('hidden');-->
+<!--                document.getElementById('logoutBtn').style.display = 'block';-->
+<!--                document.getElementById('welcomeText').textContent = `Welcome, ${userName}!`;-->
+<!--                loadJournalEntries();-->
+<!--            } else {-->
+<!--                showError('loginError', `Login failed: ${responseText || 'Invalid credentials'}`);-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            console.error('Login error:', error);-->
+<!--            showError('loginError', 'Login failed. Please try again. Error: ' + error.message);-->
+<!--        }-->
+<!--    }-->
+
+<!--    async function signup(e) {-->
+<!--        e.preventDefault();-->
+<!--        const userName = document.getElementById('signupUsername').value;-->
+<!--        const email = document.getElementById('signupEmail').value;-->
+<!--        const password = document.getElementById('signupPassword').value;-->
+<!--        const sentimentAnalysis = document.getElementById('sentimentAnalysis').checked;-->
+
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/public/signup`, {-->
+<!--                method: 'POST',-->
+<!--                headers: { 'Content-Type': 'application/json' },-->
+<!--                body: JSON.stringify({ userName, email, password, sentimentAnalysis })-->
+<!--            });-->
+
+<!--            if (response.ok) {-->
+<!--                showSuccess('Account created successfully! Please login.');-->
+<!--                showLogin();-->
+<!--            } else {-->
+<!--                showError('signupError', 'Signup failed. Username might be taken.');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            showError('signupError', 'Signup failed. Please try again.');-->
+<!--        }-->
+<!--    }-->
+
+<!--    function logout() {-->
+<!--        authToken = '';-->
+<!--        currentUser = {};-->
+<!--        document.getElementById('journalSection').classList.add('hidden');-->
+<!--        document.getElementById('loginSection').classList.remove('hidden');-->
+<!--        document.getElementById('logoutBtn').style.display = 'none';-->
+<!--        document.getElementById('welcomeText').textContent = '';-->
+<!--    }-->
+
+<!--    async function loadJournalEntries() {-->
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/journal`, {-->
+<!--                headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--            });-->
+
+<!--            if (response.ok) {-->
+<!--                const entries = await response.json();-->
+<!--                displayEntries(entries);-->
+<!--            } else {-->
+<!--                showError('entryError', 'Failed to load entries');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            console.error('Error loading entries:', error);-->
+<!--        }-->
+<!--    }-->
+
+<!--    function displayEntries(entries) {-->
+<!--        const container = document.getElementById('journalEntries');-->
+
+<!--        if (!entries || entries.length === 0) {-->
+<!--            container.innerHTML = '<div class="no-entries">No entries yet. Create your first journal entry!</div>';-->
+<!--            return;-->
+<!--        }-->
+
+<!--        container.innerHTML = entries.map(entry => `-->
+<!--            <div class="entry-card">-->
+<!--                <div class="entry-title">${entry.title}</div>-->
+<!--                <div class="entry-date">${new Date(entry.date).toLocaleDateString('en-US', {-->
+<!--                    year: 'numeric',-->
+<!--                    month: 'long',-->
+<!--                    day: 'numeric',-->
+<!--                    hour: '2-digit',-->
+<!--                    minute: '2-digit'-->
+<!--                })}</div>-->
+<!--                ${entry.sentiment ? `<span class="sentiment-badge sentiment-${entry.sentiment}">${entry.sentiment}</span>` : ''}-->
+<!--                <div class="entry-content">${entry.content}</div>-->
+<!--                <div class="entry-actions">-->
+<!--                    <button class="btn btn-small" onclick="editEntry('${entry.id.timestamp}', '${entry.id.date}')">Edit</button>-->
+<!--                    <button class="btn btn-small btn-danger" onclick="deleteEntry('${entry.id.timestamp}', '${entry.id.date}')">Delete</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        `).join('');-->
+<!--    }-->
+
+<!--    function showNewEntryModal() {-->
+<!--        document.getElementById('newEntryModal').classList.add('active');-->
+<!--    }-->
+
+<!--    function closeNewEntryModal() {-->
+<!--        document.getElementById('newEntryModal').classList.remove('active');-->
+<!--        document.getElementById('entryTitle').value = '';-->
+<!--        document.getElementById('entryContent').value = '';-->
+<!--        document.getElementById('entrySentiment').value = '';-->
+<!--    }-->
+
+<!--    async function createEntry(e) {-->
+<!--        e.preventDefault();-->
+<!--        const title = document.getElementById('entryTitle').value;-->
+<!--        const content = document.getElementById('entryContent').value;-->
+<!--        const sentiment = document.getElementById('entrySentiment').value;-->
+
+<!--        const entry = { title, content };-->
+<!--        if (sentiment) entry.sentiment = sentiment;-->
+
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/journal`, {-->
+<!--                method: 'POST',-->
+<!--                headers: {-->
+<!--                    'Content-Type': 'application/json',-->
+<!--                    'Authorization': `Bearer ${authToken}`-->
+<!--                },-->
+<!--                body: JSON.stringify(entry)-->
+<!--            });-->
+
+<!--            if (response.ok) {-->
+<!--                closeNewEntryModal();-->
+<!--                showSuccess('Entry created successfully!');-->
+<!--                loadJournalEntries();-->
+<!--            } else {-->
+<!--                showError('entryError', 'Failed to create entry');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            showError('entryError', 'Failed to create entry');-->
+<!--        }-->
+<!--    }-->
+
+<!--    function closeEditEntryModal() {-->
+<!--        document.getElementById('editEntryModal').classList.remove('active');-->
+<!--    }-->
+
+<!--    async function editEntry(timestamp, date) {-->
+<!--        const entryId = { timestamp: parseInt(timestamp), date: date };-->
+
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {-->
+<!--                headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--            });-->
+
+<!--            if (response.ok) {-->
+<!--                const entry = await response.json();-->
+<!--                document.getElementById('editEntryId').value = JSON.stringify(entryId);-->
+<!--                document.getElementById('editEntryTitle').value = entry.title;-->
+<!--                document.getElementById('editEntryContent').value = entry.content;-->
+<!--                document.getElementById('editEntrySentiment').value = entry.sentiment || '';-->
+<!--                document.getElementById('editEntryModal').classList.add('active');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            showError('editEntryError', 'Failed to load entry');-->
+<!--        }-->
+<!--    }-->
+
+<!--    async function updateEntry(e) {-->
+<!--        e.preventDefault();-->
+<!--        const entryId = JSON.parse(document.getElementById('editEntryId').value);-->
+<!--        const title = document.getElementById('editEntryTitle').value;-->
+<!--        const content = document.getElementById('editEntryContent').value;-->
+<!--        const sentiment = document.getElementById('editEntrySentiment').value;-->
+
+<!--        const entry = { title, content };-->
+<!--        if (sentiment) entry.sentiment = sentiment;-->
+
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {-->
+<!--                method: 'PUT',-->
+<!--                headers: {-->
+<!--                    'Content-Type': 'application/json',-->
+<!--                    'Authorization': `Bearer ${authToken}`-->
+<!--                },-->
+<!--                body: JSON.stringify(entry)-->
+<!--            });-->
+
+<!--            if (response.ok) {-->
+<!--                closeEditEntryModal();-->
+<!--                showSuccess('Entry updated successfully!');-->
+<!--                loadJournalEntries();-->
+<!--            } else {-->
+<!--                showError('editEntryError', 'Failed to update entry');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            showError('editEntryError', 'Failed to update entry');-->
+<!--        }-->
+<!--    }-->
+
+<!--    async function deleteEntry(timestamp, date) {-->
+<!--        if (!confirm('Are you sure you want to delete this entry?')) return;-->
+
+<!--        const entryId = { timestamp: parseInt(timestamp), date: date };-->
+
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {-->
+<!--                method: 'DELETE',-->
+<!--                headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--            });-->
+
+<!--            if (response.ok) {-->
+<!--                showSuccess('Entry deleted successfully!');-->
+<!--                loadJournalEntries();-->
+<!--            } else {-->
+<!--                alert('Failed to delete entry');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            alert('Failed to delete entry');-->
+<!--        }-->
+<!--    }-->
+
+<!--    async function sendSentimentEmail() {-->
+<!--        try {-->
+<!--            const response = await fetch(`${API_URL}/user/send-me-mail`, {-->
+<!--                method: 'POST',-->
+<!--                headers: { 'Authorization': `Bearer ${authToken}` }-->
+<!--            });-->
+
+<!--            if (response.ok) {-->
+<!--                showSuccess('Sentiment report sent to your email!');-->
+<!--            } else {-->
+<!--                alert('Failed to send sentiment report');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            alert('Failed to send sentiment report');-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Auth Section */
+        .auth-container {
+            max-width: 450px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            background: white;
+            cursor: pointer;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .auth-switch a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        /* Journal Section */
+        .journal-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .journal-header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .journal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .entry-form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .entries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .entry-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            max-height : 400px;
+            overflow : auto;
+        }
+
+        .entry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .entry-title {
+            color: #667eea;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .entry-date {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .entry-content {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .sentiment-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .sentiment-HAPPY {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .sentiment-SAD {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .sentiment-ANGRY {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .sentiment-ANXIOUS {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .entry-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .no-entries {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            color: #999;
+            font-size: 1.2em;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            color: #667eea;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">📔 Journal App</div>
+    <div class="nav-links" id="navLinks">
+        <span id="welcomeText"></span>
+        <button class="btn btn-outline" onclick="logout()" id="logoutBtn" style="display: none;">Logout</button>
+    </div>
+</nav>
+
+<!-- Login Section -->
+<div id="loginSection" class="auth-container">
+    <h2 class="auth-title">Welcome Back</h2>
+    <div id="loginError" class="error hidden"></div>
+    <form onsubmit="login(event)">
+        <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" required>
+        </div>
+        <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-full">Login</button>
+    </form>
+    <div class="auth-switch">
+        Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+    </div>
+</div>
+
+<!-- Signup Section -->
+<div id="signupSection" class="auth-container hidden">
+    <h2 class="auth-title">Create Account</h2>
+    <div id="signupError" class="error hidden"></div>
+    <form onsubmit="signup(event)">
+        <div class="form-group">
+            <label for="signupUsername">Username</label>
+            <input type="text" id="signupUsername" required>
+        </div>
+        <div class="form-group">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" required>
+        </div>
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="sentimentAnalysis">
+            <label for="sentimentAnalysis" style="margin-bottom: 0;">Enable Sentiment Analysis</label>
+        </div>
+        <button type="submit" class="btn btn-full">Sign Up</button>
+    </form>
+    <div class="auth-switch">
+        Already have an account? <a href="#" onclick="showLogin()">Login</a>
+    </div>
+</div>
+
+<!-- Journal Section -->
+<div id="journalSection" class="container hidden">
+    <div class="journal-header">
+        <h1>My Journal</h1>
+        <p class="user-info" id="userInfo"></p>
+        <div class="journal-actions">
+            <button class="btn" onclick="showNewEntryModal()">✍️ New Entry</button>
+            <button class="btn btn-outline" onclick="sendSentimentEmail()">📧 Get Sentiment Report</button>
+        </div>
+    </div>
+
+    <div id="journalEntries" class="entries-grid"></div>
+</div>
+
+<!-- New Entry Modal -->
+<div id="newEntryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">New Journal Entry</h2>
+            <button class="close-btn" onclick="closeNewEntryModal()">&times;</button>
+        </div>
+        <div id="entryError" class="error hidden"></div>
+        <form onsubmit="createEntry(event)">
+            <div class="form-group">
+                <label for="entryTitle">Title</label>
+                <input type="text" id="entryTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="entryContent">Content</label>
+                <textarea id="entryContent" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="entrySentiment">Sentiment (Optional)</label>
+                <select id="entrySentiment">
+                    <option value="">Select sentiment...</option>
+                    <option value="HAPPY">😊 Happy</option>
+                    <option value="SAD">😢 Sad</option>
+                    <option value="ANGRY">😠 Angry</option>
+                    <option value="ANXIOUS">😰 Anxious</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-full">Save Entry</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Entry Modal -->
+<div id="editEntryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Edit Journal Entry</h2>
+            <button class="close-btn" onclick="closeEditEntryModal()">&times;</button>
+        </div>
+        <div id="editEntryError" class="error hidden"></div>
+        <form onsubmit="updateEntry(event)">
+            <input type="hidden" id="editEntryId">
+            <div class="form-group">
+                <label for="editEntryTitle">Title</label>
+                <input type="text" id="editEntryTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="editEntryContent">Content</label>
+                <textarea id="editEntryContent" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editEntrySentiment">Sentiment (Optional)</label>
+                <select id="editEntrySentiment">
+                    <option value="">Select sentiment...</option>
+                    <option value="HAPPY">😊 Happy</option>
+                    <option value="SAD">😢 Sad</option>
+                    <option value="ANGRY">😠 Angry</option>
+                    <option value="ANXIOUS">😰 Anxious</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-full">Update Entry</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const API_URL = 'http://localhost:8080';
+    let authToken = '';
+    let currentUser = {};
+
+    // Helper function to log API calls for debugging
+    function logAPICall(method, endpoint, data = null) {
+        console.log('=== API CALL ===');
+        console.log('Method:', method);
+        console.log('URL:', `${API_URL}${endpoint}`);
+        if (data) console.log('Body:', JSON.stringify(data, null, 2));
+        if (authToken) console.log('Token:', authToken.substring(0, 20) + '...');
+        console.log('===============');
+    }
+
+    function showError(elementId, message) {
+        const el = document.getElementById(elementId);
+        el.textContent = message;
+        el.classList.remove('hidden');
+        setTimeout(() => el.classList.add('hidden'), 5000);
+    }
+
+    function showSuccess(message) {
+        alert(message);
+    }
+
+    function showLogin() {
+        document.getElementById('loginSection').classList.remove('hidden');
+        document.getElementById('signupSection').classList.add('hidden');
+    }
+
+    function showSignup() {
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('signupSection').classList.remove('hidden');
+    }
+
+    async function login(e) {
+        e.preventDefault();
+        const userName = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+
+        const requestData = { userName, password };
+        logAPICall('POST', '/public/login', requestData);
+
+        try {
+            const response = await fetch(`${API_URL}/public/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestData)
+            });
+
+            console.log('Response status:', response.status);
+
+            // Your backend returns plain text (JWT token or empty string)
+            const responseText = await response.text();
+            console.log('Response from backend:', responseText);
+
+            // Check if we got a token (non-empty string)
+            if (responseText && responseText.trim() !== '') {
+                authToken = responseText.trim();
+                console.log('✅ Login successful! Token saved:', authToken.substring(0, 20) + '...');
+
+                currentUser = { userName };
+
+                // Hide login, show journal
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('journalSection').classList.remove('hidden');
+                document.getElementById('logoutBtn').style.display = 'block';
+                document.getElementById('welcomeText').textContent = `Welcome, ${userName}!`;
+
+                // Load user's journal entries
+                loadJournalEntries();
+            } else {
+                // Empty string = login failed
+                console.log('❌ Login failed - backend returned empty string');
+                showError('loginError', 'Invalid username or password');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showError('loginError', 'Login failed. Please check if backend is running. Error: ' + error.message);
+        }
+    }
+
+    async function signup(e) {
+        e.preventDefault();
+        const userName = document.getElementById('signupUsername').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const sentimentAnalysis = document.getElementById('sentimentAnalysis').checked;
+
+        try {
+            const response = await fetch(`${API_URL}/public/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userName, email, password, sentimentAnalysis })
+            });
+
+            if (response.ok) {
+                showSuccess('Account created successfully! Please login.');
+                showLogin();
+            } else {
+                showError('signupError', 'Signup failed. Username might be taken.');
+            }
+        } catch (error) {
+            showError('signupError', 'Signup failed. Please try again.');
+        }
+    }
+
+    function logout() {
+        authToken = '';
+        currentUser = {};
+        document.getElementById('journalSection').classList.add('hidden');
+        document.getElementById('loginSection').classList.remove('hidden');
+        document.getElementById('logoutBtn').style.display = 'none';
+        document.getElementById('welcomeText').textContent = '';
+    }
+
+    async function loadJournalEntries() {
+        try {
+            const response = await fetch(`${API_URL}/journal`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+
+            if (response.ok) {
+                const entries = await response.json();
+                displayEntries(entries);
+
+                console.log(entries);
+            } else {
+                showError('entryError', 'Failed to load entries');
+            }
+        } catch (error) {
+            console.error('Error loading entries:', error);
+        }
+    }
+
+    function displayEntries(entries) {
+        const container = document.getElementById('journalEntries');
+
+        if (!entries || entries.length === 0) {
+            container.innerHTML = '<div class="no-entries">No entries yet. Create your first journal entry!</div>';
+            return;
+        }
+
+        container.innerHTML = entries.map(entry => `
+
+
+            <div class="entry-card">
+                <div class="entry-title">${entry.title}</div>
+                <div class="entry-date">${new Date(entry.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}</div>
+                ${entry.sentiment ? `<span class="sentiment-badge sentiment-${entry.sentiment}">${entry.sentiment}</span>` : ''}
+                <div class="entry-content">${entry.content}</div>
+                <div class="entry-actions">
+                    <button class="btn btn-small" onclick="editEntry('${entry.id.timestamp}', '${entry.id.date}')">Edit</button>
+                    <button class="btn btn-small btn-danger" onclick="deleteEntry('${entry.id}')">Delete</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function showNewEntryModal() {
+        document.getElementById('newEntryModal').classList.add('active');
+    }
+
+    function closeNewEntryModal() {
+        document.getElementById('newEntryModal').classList.remove('active');
+        document.getElementById('entryTitle').value = '';
+        document.getElementById('entryContent').value = '';
+        document.getElementById('entrySentiment').value = '';
+    }
+
+    async function createEntry(e) {
+        e.preventDefault();
+        const title = document.getElementById('entryTitle').value;
+        const content = document.getElementById('entryContent').value;
+        const sentiment = document.getElementById('entrySentiment').value;
+
+        const entry = { title, content };
+        if (sentiment) entry.sentiment = sentiment;
+
+        try {
+            const response = await fetch(`${API_URL}/journal`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify(entry)
+            });
+
+            if (response.ok) {
+                closeNewEntryModal();
+                showSuccess('Entry created successfully!');
+                loadJournalEntries();
+            } else {
+                showError('entryError', 'Failed to create entry');
+            }
+        } catch (error) {
+            showError('entryError', 'Failed to create entry');
+        }
+    }
+
+    function closeEditEntryModal() {
+        document.getElementById('editEntryModal').classList.remove('active');
+    }
+
+    async function editEntry(timestamp, date) {
+        const entryId = { timestamp: parseInt(timestamp), date: date };
+
+        try {
+            const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+
+            if (response.ok) {
+                const entry = await response.json();
+                document.getElementById('editEntryId').value = JSON.stringify(entryId);
+                document.getElementById('editEntryTitle').value = entry.title;
+                document.getElementById('editEntryContent').value = entry.content;
+                document.getElementById('editEntrySentiment').value = entry.sentiment || '';
+                document.getElementById('editEntryModal').classList.add('active');
+            }
+        } catch (error) {
+            showError('editEntryError', 'Failed to load entry');
+        }
+    }
+
+    async function updateEntry(e) {
+        e.preventDefault();
+        const entryId = JSON.parse(document.getElementById('editEntryId').value);
+        const title = document.getElementById('editEntryTitle').value;
+        const content = document.getElementById('editEntryContent').value;
+        const sentiment = document.getElementById('editEntrySentiment').value;
+
+        const entry = { title, content };
+        if (sentiment) entry.sentiment = sentiment;
+
+        try {
+            const response = await fetch(`${API_URL}/journal/id/${JSON.stringify(entryId)}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify(entry)
+            });
+
+            if (response.ok) {
+                closeEditEntryModal();
+                showSuccess('Entry updated successfully!');
+                loadJournalEntries();
+            } else {
+                showError('editEntryError', 'Failed to update entry');
+            }
+        } catch (error) {
+            showError('editEntryError', 'Failed to update entry');
+        }
+    }
+
+    async function deleteEntry(entryId) {
+    console.log(entryId);
+        if (!confirm('Are you sure you want to delete this entry?')) return;
+
+<!--        const entryId = { timestamp: parseInt(timestamp), date: date };-->
+
+        try {
+            const response = await fetch(`${API_URL}/journal/id/${entryId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+
+            if (response.ok) {
+                showSuccess('Entry deleted successfully!');
+                loadJournalEntries();
+            } else {
+                alert('Failed to delete entry');
+            }
+        } catch (error) {
+            alert('Failed to delete entry');
+        }
+    }
+
+    async function sendSentimentEmail() {
+        try {
+            const response = await fetch(`${API_URL}/user/send-me-mail`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+
+            if (response.ok) {
+                showSuccess('Sentiment report sent to your email!');
+            } else {
+                alert('Failed to send sentiment report');
+            }
+        } catch (error) {
+            alert('Failed to send sentiment report');
+        }
+    }
+</script>
+</body>
+</html>

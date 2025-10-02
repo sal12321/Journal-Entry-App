@@ -1,5 +1,7 @@
 package com.salAce.journalApp.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.salAce.journalApp.enums.Sentiment;
 import lombok.Data;
 
@@ -19,13 +21,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class JournalEntry {
 
-
     @Id
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id ;
     @NonNull
     private String title ;
     private String content;
     private LocalDateTime date;
     private Sentiment sentiment ;
+
+
 
 }
