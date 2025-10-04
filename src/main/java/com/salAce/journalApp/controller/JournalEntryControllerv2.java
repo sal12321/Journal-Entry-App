@@ -8,10 +8,12 @@ import com.salAce.journalApp.service.UserEntryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.OidcLogoutDsl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @RestController
     @RequestMapping("/journal")
 
@@ -128,41 +130,45 @@ public class JournalEntryControllerv2 {
 
     public ResponseEntity<?> updateJournalEntry(@PathVariable ObjectId myId, @RequestBody JournalEntry newEntry) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authentication.getName(); // got the suerName from authentication part
-
-        User user = userEntryService.findByUserName(userName);
-        List<JournalEntry> collect = user.getJournalEntries().stream().filter(x -> x.getId().equals(myId)).collect(Collectors.toList());
-
-        if (!collect.isEmpty()) {
-            Optional<JournalEntry> journalEntry = journalEntryService.findById(myId);
-
-
-            if (journalEntry.isPresent()) {
-
-                JournalEntry old = journalEntry.get(); // get the journalEntry if found using id...as old
-
-                if (!(newEntry.getTitle() == null && newEntry.getTitle().equals(""))) {
-                    old.setTitle(newEntry.getTitle());
-                }
-
-
-                    if (!(newEntry.getContent() == null && newEntry.getContent().equals(""))) {
-                        old.setContent(newEntry.getContent());
-                }
+        try{
 
 
 
-                        journalEntryService.saveEntry(old);
-                        return new ResponseEntity<>(old, HttpStatus.OK);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String userName = authentication.getName(); // got the suerName from authentication part
+
+            User user = userEntryService.findByUserName(userName);
 
 
-                    }
-                }
+            Optional<JournalEntry> journalEntry = journalEntryService.findById(myId); // get the journal entry by id
+            if(journalEntry.isPresent()){
+            JournalEntry old = journalEntry.get(); // get the journalEntry if found using id...as old
 
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND); /// if user is not found then send NOT_FOUND
 
+            old.setSentiment(newEntry.getSentiment());
+            old.setContent(newEntry.getContent());
+            old.setTitle(newEntry.getTitle());
+            journalEntryService.saveEntry(old); // changes were put in old one
+            return new ResponseEntity<>(HttpStatus.OK); ///
+
+        }else{
+
+                log.error("No Journal Entry was found");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT); ///
             }
+
+
+
+
+
+        }catch (Exception e) {
+            log.error(e.toString()) ;
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); ///
+        }
+
+
+
+    }
 
 
         }
