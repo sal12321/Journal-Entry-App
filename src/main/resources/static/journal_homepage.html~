@@ -1,0 +1,156 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal App</title>
+    <link rel = "stylesheet" href="homepageStyle.css">
+    <script src="homepageLogics.js" defer></script>
+
+
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">📔 Journal App</div>
+    <div class="nav-links" id="navLinks">
+        <span id="welcomeText"></span>
+        <button class="btn btn-outline" onclick="logout()" id="logoutBtn" style="display: none;">Logout</button>
+    </div>
+</nav>
+
+<!-- Login Section -->
+<div id="loginSection" class="auth-container">
+    <h2 class="auth-title">Welcome Back</h2>
+    <div id="loginError" class="error hidden"></div>
+    <form onsubmit="login(event)">
+        <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" required>
+        </div>
+        <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-full">Login</button>
+    </form>
+    <div class="auth-switch">
+        Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+    </div>
+</div>
+
+<!-- Signup Section -->
+<div id="signupSection" class="auth-container hidden">
+    <h2 class="auth-title">Create Account</h2>
+    <div id="signupError" class="error hidden"></div>
+    <form onsubmit="signup(event)">
+        <div class="form-group">
+            <label for="signupUsername">Username</label>
+            <input type="text" id="signupUsername" required>
+        </div>
+        <div class="form-group">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" required>
+        </div>
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="sentimentAnalysis">
+            <label for="sentimentAnalysis" style="margin-bottom: 0;">Enable Sentiment Analysis</label>
+        </div>
+        <button type="submit" class="btn btn-full">Sign Up</button>
+    </form>
+    <div class="auth-switch">
+        Already have an account? <a href="#" onclick="showLogin()">Login</a>
+    </div>
+</div>
+
+<!-- Journal Section -->
+<div id="journalSection" class="container hidden">
+    <div class="journal-header">
+        <h1>My Journal</h1>
+        <p class="user-info" id="userInfo"></p>
+        <div class="journal-actions">
+            <button class="btn" onclick="showNewEntryModal()">✍️ New Entry</button>
+            <button class="btn btn-outline" onclick="sendSentimentEmail()">📧 Get Sentiment Report</button>
+        </div>
+    </div>
+
+    <div id="journalEntries" class="entries-grid"></div>
+</div>
+
+<!-- New Entry Modal -->
+<div id="newEntryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">New Journal Entry</h2>
+            <button class="close-btn" onclick="closeNewEntryModal()">&times;</button>
+        </div>
+        <div id="entryError" class="error hidden"></div>
+        <form onsubmit="createEntry(event)">
+            <div class="form-group">
+                <label for="entryTitle">Title</label>
+                <input type="text" id="entryTitle" placeholder="Keep it catchy.." required>
+            </div>
+            <div class="form-group">
+                <label for="entryContent">Content</label>
+                <textarea id="entryContent" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="entrySentiment">Sentiment (Optional)</label>
+                <select id="entrySentiment">
+                    <option value="">Select sentiment...</option>
+                    <option value="HAPPY">😊 Happy</option>
+                    <option value="SAD">😢 Sad</option>
+                    <option value="ANGRY">😠 Angry</option>
+                    <option value="ANXIOUS">😰 Anxious</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-full">Save Entry</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Entry Modal -->
+<div id="editEntryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Edit Journal Entry</h2>
+            <button class="close-btn" onclick="closeEditEntryModal()">&times;</button>
+        </div>
+        <div id="editEntryError" class="error hidden"></div>
+        <form onsubmit="updateEntry(event)">
+            <input type="hidden" id="editEntryId">
+            <div class="form-group">
+                <label for="editEntryTitle">Title</label>
+                <input type="text" id="editEntryTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="editEntryContent">Content</label>
+                <textarea id="editEntryContent" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editEntrySentiment">Sentiment (Optional)</label>
+                <select id="editEntrySentiment">
+                    <option value="">Select sentiment...</option>
+                    <option value="HAPPY">😊 Happy</option>
+                    <option value="SAD">😢 Sad</option>
+                    <option value="ANGRY">😠 Angry</option>
+                    <option value="ANXIOUS">😰 Anxious</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-full">Update Entry</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
