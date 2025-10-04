@@ -21,15 +21,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Tag(name = "Public APIs", description = "Login and Signup")
 
 @RestController ///  so that these methods will return in json/text format and not any jsp or html....
 @Slf4j
 @RequestMapping("/public")
+
 public class PublicController {
     @Autowired
     private UserEntryService userEntryService ;
@@ -47,6 +51,7 @@ public class PublicController {
     @Autowired
     private JwtUtil jwtUtils ;
 
+    @ResponseBody
     @GetMapping("/sa/users")
     @Operation(summary = "See users who have opted for sentimentAnalysis")
     public ResponseEntity<?> check(){
@@ -60,11 +65,28 @@ public class PublicController {
     }
 
     @PostMapping("/signup")
-    public void signup(@RequestBody User user){
-        userEntryService.saveNewEntry(user);
+    public ResponseEntity<?> signup(@RequestBody User user){
+      boolean flag =  userEntryService.saveNewEntry(user);
 
+      Map<String, String> response = new HashMap<>();
+
+
+
+        if (!flag) {
+
+            response.put("status" , "conflict") ;
+            response.put("message", "Username already exists");
+
+            return new ResponseEntity<>(response , HttpStatus.CONFLICT); // 409 Conflict
+        }
+
+        response.put("status" , "created") ;
+        response.put("message", "Account Created Successfully");
+        return new ResponseEntity<>(response , HttpStatus.CREATED);
      }
 
+
+     @ResponseBody
      @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO user){
 
