@@ -29,7 +29,7 @@ public class UserSchedular {
 
 //  cron mens cronos which means time
     //    @Scheduled(cron = "*/1 * * * *")
-@Scheduled(cron = "0 */10 * * * *") //every 10minutes
+@Scheduled(cron = "0 0 3 ? * MON,WED,FRI,SUN *") //every 10minutes
 
 
 
