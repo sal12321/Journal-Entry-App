@@ -69,10 +69,13 @@ public class UserController {
     }
     @Operation(summary = "Hit me to get sentiment Analysis if opted." )
     @PostMapping("/send-me-mail")
-
     public ResponseEntity<?> mailBhejoReBaba(){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication() ;
+        String userName = authentication.getName();
      try{
-         userSchedular.fetchUserAndSendSaMail();
+//         userSchedular.fetchUserAndSendSaMail();
+         userSchedular.getSentimentEmail(userName);
          return new ResponseEntity<>(HttpStatus.OK) ;
      }
      catch (Exception e) {
