@@ -24,7 +24,10 @@ public class CreateAdminDTO{
     private String userName ;
     @NonNull
     private String password ;
+    private String email;
 
+
+    private boolean sentimentAnalysis ;
 
 
 }
