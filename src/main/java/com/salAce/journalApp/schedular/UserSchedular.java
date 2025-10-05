@@ -2,10 +2,13 @@ package com.salAce.journalApp.schedular;
 
 import com.salAce.journalApp.entity.JournalEntry;
 import com.salAce.journalApp.entity.SAuser;
+import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.enums.Sentiment;
+import com.salAce.journalApp.repo.UserEntryRepo;
 import com.salAce.journalApp.service.EmailService;
 import com.salAce.journalApp.service.SentimentAnalysisService;
 import com.salAce.journalApp.service.UserRepositoryImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -15,8 +18,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Component
 public class UserSchedular {
 
@@ -27,9 +31,10 @@ public class UserSchedular {
     @Autowired
     private SentimentAnalysisService sentimentAnalysisService ;
 
-//  cron mens cronos which means time
-    //    @Scheduled(cron = "*/1 * * * *")
-@Scheduled(cron = "0 0 3 ? * MON,WED,FRI,SUN *") //every 10minutes
+    @Autowired
+    private UserEntryRepo userEntryRepo ;
+
+
 
 
 
@@ -63,10 +68,6 @@ public void fetchUserAndSendSaMail(){
             }
 
 
-//        String entry = String.join(" ", sentiments) ;/
-//       String sentiment =  sentimentAnalysisService.getSentiment(entry) ;
-
-//            emailService.sendEmail(user.getEmail() , "sentiment of last 7 days " , sentiment); ;
 
         }
 
@@ -76,4 +77,50 @@ public void fetchUserAndSendSaMail(){
 
 
     }
+
+    public void getSentimentEmail(String username) {
+
+
+        User user = userEntryRepo.findByUserName(username);
+        if (Objects.equals(user.getEmail(), "")){
+            log.error("Email was not found of this user");
+
+            return ;
+        }
+
+        List<Sentiment> sentiments =user.getJournalEntries().stream().filter(x -> x.getDate().isAfter(LocalDateTime.now().minus(7, ChronoUnit.DAYS))).map(x -> x.getSentiment()).collect(Collectors.toList()) ;
+///  here we are having the list of sentiment
+        Map<Sentiment, Integer> sentimentCounts = new HashMap<>() ;
+        for(Sentiment sentiment : sentiments) {
+            if(sentiment != null) {
+                sentimentCounts.put(sentiment , sentimentCounts.getOrDefault(sentiment , 0) + 1)  ;
+            }
+        }
+        Sentiment mostFreqSentiment = null ;
+        int maxCount= 0 ;
+
+        for(Map.Entry<Sentiment , Integer> entry : sentimentCounts.entrySet()){
+            if(entry.getValue() >= maxCount){
+                maxCount = entry.getValue() ;
+                mostFreqSentiment = entry.getKey() ;
+            }
+        }
+        if(mostFreqSentiment != null){
+            emailService.sendEmail(user.getEmail() , "Sentiment of last week"  , mostFreqSentiment.toString()) ;
+            log.info("Email was sent");
+
+        }
+        else{
+            emailService.sendEmail(user.getEmail() , "Sentiment of last week"  , "you have opted no any sentiment") ;
+            log.info("no sentiment");
+
+
+        }
+
+
+
+    }
+
+
 }
+
