@@ -7,6 +7,8 @@ import lombok.NonNull;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 
 @Document(collection = "users")
 @Data
@@ -20,6 +22,7 @@ public class LoginDTO {
     private String userName ;
     @NonNull
     private String password ;
+    private List<String> roles ;
 
 
 }
