@@ -63,6 +63,7 @@ public class UserEntryService {
             User user = new User();
             user.setUserName(dtoUser.getUserName());
             user.setPassword(dtoUser.getPassword());
+            user.setEmail(dtoUser.getEmail());
 
             user.setRoles(Arrays.asList("USER" , "ADMIN"));
 
