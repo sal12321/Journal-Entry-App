@@ -1,8 +1,10 @@
 
     const API_URL = 'https://journal-entry-app-production.up.railway.app';
+//    const API_URL = 'http://localhost:8080';
     let authToken = '';
     let currentUser = {};
     console.log("JS file loaded!");
+    let isAdmin = false;
 
 
     // Helper function to log API calls for debugging
@@ -54,12 +56,16 @@
             console.log('Response status:', response.status);
 
             // Your backend returns plain text (JWT token or empty string)
-            const responseText = await response.text();
+            const data = await response.json() ; // jwt and role
 //            console.log('Response from backend:', responseText);
 
             // Check if we got a token (non-empty string)
-            if (responseText && responseText.trim() !== '') {
-                authToken = responseText.trim();
+            if (data.jwt != "") {
+                authToken = data.jwt;
+
+
+
+
 //                console.log('✅ Login successful! Token saved:', authToken.substring(0, 5) + '...');
 
                 currentUser = { userName };
@@ -69,6 +75,21 @@
                 document.getElementById('journalSection').classList.remove('hidden');
                 document.getElementById('logoutBtn').style.display = 'block';
                 document.getElementById('welcomeText').textContent = `Welcome, ${userName}!`;
+
+                                                  try {
+                                                   if (data.role && data.role == "ADMIN") {
+                                                                    isAdmin = true;
+                                                                               }
+                                                       }catch (error) {
+                                                            console.error('Error checking admin status:', error);
+                                                           }
+
+
+                                if (isAdmin) {
+                                    document.getElementById('adminBtn').style.display = 'block';
+                                }
+
+
 
                 // Load user's journal entries
                 loadJournalEntries();
@@ -124,6 +145,9 @@ if (response.status === 201) {
         document.getElementById('loginSection').classList.remove('hidden');
         document.getElementById('logoutBtn').style.display = 'none';
         document.getElementById('welcomeText').textContent = '';
+        isAdmin = false;
+        document.getElementById('adminBtn').style.display = 'none';
+        document.getElementById('adminSection').classList.add('hidden');
     }
 
     async function loadJournalEntries() {
@@ -327,5 +351,103 @@ if (response.status === 201) {
             }
         } catch (error) {
             alert('Failed to send sentiment report');
+        }
+    }
+
+
+
+    async function checkIfAdmin() {
+        try {
+//            const response = await fetch(`${API_URL}/user`, {
+//                headers: { 'Authorization': `Bearer ${authToken}` }
+//            });
+            if (response.ok) {
+                const userData = await response.json();
+                if (userData.roles && userData.roles.includes('ADMIN')) {
+                    isAdmin = true;
+                }
+            }
+        } catch (error) {
+            console.error('Error checking admin status:', error);
+        }
+    }
+
+    function showAdminPanel() {
+        document.getElementById('journalSection').classList.add('hidden');
+        document.getElementById('adminSection').classList.remove('hidden');
+        loadAllUsers();
+    }
+
+    function showBackToJournal() {
+        document.getElementById('adminSection').classList.add('hidden');
+        document.getElementById('journalSection').classList.remove('hidden');
+    }
+
+    async function loadAllUsers() {
+        try {
+            const response = await fetch(`${API_URL}/admin/all-users`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+            if (response.ok) {
+                const users = await response.json();
+                displayAllUsers(users);
+            }
+        } catch (error) {
+            console.error('Error loading users:', error);
+        }
+    }
+
+    function displayAllUsers(users) {
+        const container = document.getElementById('allUsersList');
+        if (!users || users.length === 0) {
+            container.innerHTML = '<div class="no-entries">No users found</div>';
+            return;
+        }
+        container.innerHTML = users.map(user => `
+            <div class="entry-card">
+                <div class="entry-title">${user.userName}</div>
+                <div class="entry-content">
+                    <strong>Email:</strong> ${user.email || 'N/A'}<br>
+                    <strong>Roles:</strong> ${user.roles ? user.roles.join(', ') : 'USER'}<br>
+                    <strong>Entries:</strong> ${user.journalEntries ? user.journalEntries.length : 0}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function showCreateAdminModal() {
+        document.getElementById('createAdminModal').classList.add('active');
+    }
+
+    function closeCreateAdminModal() {
+        document.getElementById('createAdminModal').classList.remove('active');
+        document.getElementById('adminUsername').value = '';
+        document.getElementById('adminPassword').value = '';
+    }
+
+    async function createAdmin(e) {
+        e.preventDefault();
+        const userName = document.getElementById('adminUsername').value;
+        const password = document.getElementById('adminPassword').value;
+        const sentiment = document.getElementById('sentimentAnalysisAdmin').value;
+        const email = document.getElementById('signupEmailAdmin').value;
+        try {
+            const response = await fetch(`${API_URL}/admin/create-admin`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({ userName, password , email, sentiment })
+            });
+            if (response.ok) {
+                closeCreateAdminModal();
+                showSuccess('Admin created successfully!');
+                loadAllUsers();
+            } else {
+                showError('adminError', 'Failed to create admin');
+            }
+        } catch (error) {
+            showError('adminError', 'Failed to create admin');
         }
     }
