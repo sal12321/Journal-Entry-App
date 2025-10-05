@@ -5,6 +5,7 @@ import ch.qos.logback.classic.Logger;
 import com.salAce.journalApp.entity.LoginDTO;
 import com.salAce.journalApp.entity.SAuser;
 import com.salAce.journalApp.entity.User;
+import com.salAce.journalApp.repo.UserEntryRepo;
 import com.salAce.journalApp.service.EmailService;
 import com.salAce.journalApp.service.UserDetailsServiceImp;
 import com.salAce.journalApp.service.UserRepositoryImpl;
@@ -35,6 +36,8 @@ import java.util.Map;
 @RequestMapping("/public")
 
 public class PublicController {
+    @Autowired
+    private UserEntryRepo userEntryRepo ;
     @Autowired
     private UserEntryService userEntryService ;
     @Autowired
@@ -95,11 +98,16 @@ public class PublicController {
 try{
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName() , user.getPassword())) ;
     UserDetails userDetails =
-            userDetailsServiceImp .loadUserByUsername(user.getUserName()) ;
+            userDetailsServiceImp.loadUserByUsername(user.getUserName()) ;
 
     String jwt =  jwtUtils.generateToken(user.getUserName()) ;
 
-    return new ResponseEntity<>(jwt , HttpStatus.OK) ;
+
+
+    String role = userEntryRepo.findByUserName(user.getUserName()).getRoles().get(1);
+    Map<String , String> jwtAndRole = Map.of("jwt" , jwt , "role" , role );
+
+    return new ResponseEntity<>(jwtAndRole , HttpStatus.OK) ;
 
 }catch (Exception e ){
     log.error(String.valueOf(e));
