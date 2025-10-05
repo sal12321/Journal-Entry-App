@@ -1,9 +1,4 @@
 
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +16,7 @@
     <div class="nav-links" id="navLinks">
         <span id="welcomeText"></span>
         <button class="btn btn-outline" onclick="logout()" id="logoutBtn" style="display: none;">Logout</button>
+        <button class="btn" onclick="showAdminPanel()" id="adminBtn" style="display: none;">Admin Panel</button>
     </div>
 </nav>
 
@@ -151,6 +147,48 @@
     </div>
 </div>
 
+<!-- Admin Panel Section -->
+<div id="adminSection" class="container hidden">
+    <div class="journal-header">
+        <h1>Admin Panel</h1>
+        <p class="user-info">Manage users and create admin accounts</p>
+        <div class="journal-actions">
+            <button class="btn" onclick="showBackToJournal()">Back to Journal</button>
+            <button class="btn" onclick="showCreateAdminModal()">Create Admin</button>
+            <button class="btn btn-outline" onclick="loadAllUsers()">Refresh Users</button>
+        </div>
+    </div>
+    <div id="allUsersList" class="entries-grid"></div>
+</div>
 
+<!-- Create Admin Modal -->
+<div id="createAdminModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Create New Admin</h2>
+            <button class="close-btn" onclick="closeCreateAdminModal()">&times;</button>
+        </div>
+        <div id="adminError" class="error hidden"></div>
+        <form onsubmit="createAdmin(event)">
+            <div class="form-group">
+                <label for="adminUsername">Username</label>
+                <input type="text" id="adminUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmailAdmin" required>
+            </div>
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="sentimentAnalysisAdmin">
+                <label for="sentimentAnalysis" style="margin-bottom: 0;">Enable Sentiment Analysis</label>
+            </div>
+            <button type="submit" class="btn btn-full">Create Admin</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
