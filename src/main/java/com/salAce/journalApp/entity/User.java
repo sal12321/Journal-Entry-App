@@ -30,6 +30,7 @@ public class User {
         private boolean sentimentAnalysis ; // sentiment means the mood of the user
         @DBRef
         private List<JournalEntry> journalEntries = new ArrayList<>() ;
+
         private List<String> roles ;
 
 
