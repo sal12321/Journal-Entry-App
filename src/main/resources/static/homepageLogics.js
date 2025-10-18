@@ -1,6 +1,6 @@
 
-    const API_URL = 'https://journal-entry-app-production.up.railway.app';
-//    const API_URL = 'http://localhost:8080';
+//    const API_URL = 'https://journal-entry-app-production.up.railway.app';
+    const API_URL = 'http://localhost:8080';
     let authToken = '';
     let currentUser = {};
     console.log("JS file loaded!");
@@ -55,9 +55,10 @@
 
             console.log('Response status:', response.status);
 
+
             // Your backend returns plain text (JWT token or empty string)
             const data = await response.json() ; // jwt and role
-//            console.log('Response from backend:', responseText);
+            console.log('Response from backend:', data);
 
             // Check if we got a token (non-empty string)
             if (data.jwt != "") {
@@ -88,6 +89,10 @@
                                 if (isAdmin) {
                                     document.getElementById('adminBtn').style.display = 'block';
                                 }
+
+
+
+
 
 
 
@@ -451,3 +456,18 @@ if (response.status === 201) {
             showError('adminError', 'Failed to create admin');
         }
     }
+
+    //atif's work
+
+//    let adbtn=document.querySelector("#adminBtn");
+//    let btnan=document.querySelector(".btnan");
+//
+//    adbtn.addEventListener("click",()=>{
+//        adbtn.style.display="hidden";
+//        btnan.classList.add("adbtn");
+//
+//    })
+//    btnan.addEventListener("click",()=>{
+//        btnan.classList.remove("adbtn");
+//        adbtn.style.display="inline";
+//    })

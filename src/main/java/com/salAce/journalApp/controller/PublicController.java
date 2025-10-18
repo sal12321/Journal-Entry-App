@@ -103,9 +103,19 @@ try{
     String jwt =  jwtUtils.generateToken(user.getUserName()) ;
 
 
+    Map<String , String> jwtAndRole = new HashMap<>();
 
+    try{
     String role = userEntryRepo.findByUserName(user.getUserName()).getRoles().get(1);
-    Map<String , String> jwtAndRole = Map.of("jwt" , jwt , "role" , role );
+        jwtAndRole = Map.of("jwt" , jwt , "role" , role );
+
+
+}catch (Exception e){
+    jwtAndRole = Map.of("jwt" , jwt , "role" , "" );
+
+
+}
+
 
     return new ResponseEntity<>(jwtAndRole , HttpStatus.OK) ;
 

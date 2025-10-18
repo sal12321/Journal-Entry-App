@@ -43,6 +43,8 @@ public class UserEntryService {
             user.setPassword(passEncoder.encode(user.getPassword()));
             //get the pass ecode it and save the user in our database
             user.setRoles(Arrays.asList("USER"));
+
+
             userEntryRepo.save(user);
             return true ;
 
