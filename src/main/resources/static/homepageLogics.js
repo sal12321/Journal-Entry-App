@@ -56,6 +56,7 @@
             console.log('Response status:', response.status);
 
 
+
             // Your backend returns plain text (JWT token or empty string)
             const data = await response.json() ; // jwt and role
             console.log('Response from backend:', data);
@@ -91,11 +92,6 @@
                                 }
 
 
-
-
-
-
-
                 // Load user's journal entries
                 loadJournalEntries();
             } else {
@@ -105,7 +101,8 @@
             }
         } catch (error) {
             console.error('Login error:', error);
-            showError('loginError', 'Login failed. Please check if backend is running. Error: ' + error.message);
+            showError('loginError', "wrong Credentials");
+            setTimeout(() => window.location.href = API_URL, 3000);
         }
     }
 
@@ -335,7 +332,7 @@ if (response.status === 201) {
                 showSuccess('Entry deleted successfully!');
                 loadJournalEntries();
             } else {
-                alert('Failed to delete entry');
+                showErrorToast("Error in deleting journal");
             }
         } catch (error) {
             alert('Failed to delete entry');
@@ -352,10 +349,10 @@ if (response.status === 201) {
             if (response.ok) {
                 showSuccess('Sentiment report sent to your email!');
             } else {
-                alert('Failed to send sentiment report');
+                showErrorToast('Failed to delete entry');
             }
         } catch (error) {
-            alert('Failed to send sentiment report');
+            showErrorToast('Failed to delete entry');
         }
     }
 
@@ -380,6 +377,7 @@ if (response.status === 201) {
     function showAdminPanel() {
         document.getElementById('journalSection').classList.add('hidden');
         document.getElementById('adminSection').classList.remove('hidden');
+        document.getElementById('adminBtn').style.display = 'none';
         loadAllUsers();
     }
 
@@ -457,17 +455,86 @@ if (response.status === 201) {
         }
     }
 
-    //atif's work
+// Toast Notification System - REPLACE THE OLD ONE
+function showToast(message, type = 'success', title = '') {
+    // Remove any existing toasts and backdrops
+    const existingToast = document.querySelector('.toast');
+    const existingBackdrop = document.querySelector('.toast-backdrop');
+    if (existingToast) existingToast.remove();
+    if (existingBackdrop) existingBackdrop.remove();
 
-//    let adbtn=document.querySelector("#adminBtn");
-//    let btnan=document.querySelector(".btnan");
-//
-//    adbtn.addEventListener("click",()=>{
-//        adbtn.style.display="hidden";
-//        btnan.classList.add("adbtn");
-//
-//    })
-//    btnan.addEventListener("click",()=>{
-//        btnan.classList.remove("adbtn");
-//        adbtn.style.display="inline";
-//    })
+    const icons = {
+        success: '✅',
+        error: '❌',
+        info: 'ℹ️',
+        warning: '⚠️'
+    };
+
+    const titles = {
+        success: title || 'Success!',
+        error: title || 'Error!',
+        info: title || 'Info',
+        warning: title || 'Warning!'
+    };
+
+    // Create backdrop
+    const backdrop = document.createElement('div');
+    backdrop.className = 'toast-backdrop';
+    document.body.appendChild(backdrop);
+
+    // Create toast
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        <div class="toast-icon">${icons[type]}</div>
+        <div class="toast-content">
+            <div class="toast-title">${titles[type]}</div>
+            <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close" onclick="closeToast()">×</button>
+    `;
+
+    document.body.appendChild(toast);
+
+    // Trigger animations
+    setTimeout(() => {
+        backdrop.classList.add('show');
+        toast.classList.add('show');
+    }, 10);
+
+    // Auto remove after 3.5 seconds
+    setTimeout(() => {
+        closeToast();
+    }, 3500);
+}
+
+function closeToast() {
+    const toast = document.querySelector('.toast');
+    const backdrop = document.querySelector('.toast-backdrop');
+
+    if (toast) {
+        toast.classList.add('hide');
+        setTimeout(() => toast.remove(), 300);
+    }
+
+    if (backdrop) {
+        backdrop.classList.remove('show');
+        setTimeout(() => backdrop.remove(), 300);
+    }
+}
+
+function showSuccess(message) {
+    showToast(message, 'success');
+}
+
+function showErrorToast(message) {
+    showToast(message, 'error');
+}
+
+function showInfoToast(message) {
+    showToast(message, 'info');
+}
+
+function showWarningToast(message) {
+    showToast(message, 'warning');
+}
