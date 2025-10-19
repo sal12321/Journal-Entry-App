@@ -26,7 +26,7 @@ public class WeatherService {
     @Autowired
     private RedisService redisService ;
 
-    @Value("${weather.api}")
+
     private String  api ;
 
     public WeatherResponse getWeather(String  city ) {
@@ -40,7 +40,7 @@ public class WeatherService {
        else {  // if response is not there in redis then get through api and store in redis
 
            //--- replacing the api                                               --- replacing key
-           final String Api =  (weatherAppCache.APP_CACHE.get("weather_api")).replace("<CITY>" , city).replace("<API_KEY>" , weatherAppCache.APP_CACHE.get("api_key")) ;
+           final String Api =  (weatherAppCache.APP_CACHE.get("url")).replace("<CITY>" , city).replace("<API_KEY>" , weatherAppCache.APP_CACHE.get("key")) ;
            ResponseEntity<WeatherResponse> weatherResponse =   restTemplate.exchange(Api , HttpMethod.GET,null, WeatherResponse.class) ;
 //        here null is for body, that means we are passing nothing. after that is response (json to pojo)
 

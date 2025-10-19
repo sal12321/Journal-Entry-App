@@ -16,7 +16,8 @@ public class RedisService {
     private RedisTemplate redisTemplate ;
     public <T> T get(String key, Class<T> entityClass){
         try{
-            Object o =  redisTemplate.opsForValue().get(key) ;
+            Object o;
+            o = redisTemplate.opsForValue().get(key);
             ObjectMapper mapper = new ObjectMapper();
             if(o != null){
                 log.info("This response is generated from Redis");
