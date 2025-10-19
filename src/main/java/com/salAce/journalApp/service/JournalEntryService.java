@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +34,7 @@ public class JournalEntryService {
         {
             try{
                 User foundUser = userEntryService.findByUserName(userName) ;
-                journalEntry.setDate(LocalDateTime.now(ZoneId.of("Asia/Kolkata")));
+                journalEntry.setDate(LocalDateTime.now());
 
                 JournalEntry saved =   journalEntryRepo.save(journalEntry) ;
                 foundUser.getJournalEntries().add(saved) ;
