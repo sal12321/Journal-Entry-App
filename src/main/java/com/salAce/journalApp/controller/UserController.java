@@ -85,38 +85,7 @@ public class UserController {
 
     }
 
-    @Operation(summary = "Check weather of Gumla" )
-    @GetMapping
-    public ResponseEntity<?> greeting(){
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            WeatherResponse res = weatherService.getWeather("Gumla");
 
-
-
-        if(res != null) {
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.enable(SerializationFeature.INDENT_OUTPUT); // Pretty print
-
-
-                return new ResponseEntity<>("HI" + authentication.getName() + mapper.writeValueAsString(res), HttpStatus.OK);
-
-
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-
-                return new ResponseEntity<>("HI " + authentication.getName() + res.toString(), HttpStatus.OK);
-
-            }
-
-        }
-
-        else{
-            return new ResponseEntity<>( HttpStatus.NOT_ACCEPTABLE) ;
-
-            }
-
-    }
 
 
     }
