@@ -13,7 +13,7 @@ async function fetchWeather() {
             weatherData.innerHTML = '<div class="loading"><div class="spinner"></div>Loading weather data...</div>';
 
             try {
-                const response = await fetch(`${API_URL}/user/weather?city=${encodeURIComponent(city)}`);
+                const response = await fetch(`${API_URL}/public/weather?city=${encodeURIComponent(city)}`);
 
                 if (!response.ok) {
                     throw new Error('City not found');
