@@ -2,14 +2,15 @@ package com.salAce.journalApp.controller;
 
 
 import ch.qos.logback.classic.Logger;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.salAce.journalApp.api.response.WeatherResponse;
 import com.salAce.journalApp.entity.LoginDTO;
 import com.salAce.journalApp.entity.SAuser;
 import com.salAce.journalApp.entity.User;
 import com.salAce.journalApp.repo.UserEntryRepo;
-import com.salAce.journalApp.service.EmailService;
-import com.salAce.journalApp.service.UserDetailsServiceImp;
-import com.salAce.journalApp.service.UserRepositoryImpl;
-import com.salAce.journalApp.service.UserEntryService;
+import com.salAce.journalApp.service.*;
 import com.salAce.journalApp.utils.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +41,8 @@ import java.util.Map;
 public class PublicController {
     @Autowired
     private UserEntryRepo userEntryRepo ;
+    @Autowired
+    private WeatherService weatherService ;
     @Autowired
     private UserEntryService userEntryService ;
     @Autowired
@@ -128,6 +133,43 @@ try{
 
 
 
+    @Operation(summary = "Check weather of your city" )
+    @GetMapping()
+    public ResponseEntity<?> greeting(@RequestParam("city") String city ){
+        ;
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse res = weatherService.getWeather(city);
+
+
+
+        if(res != null) {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.enable(SerializationFeature.INDENT_OUTPUT); // Pretty print
+
+                log.info("response is ok 1; HttpStatus.OK");
+                return new ResponseEntity<>( mapper.writeValueAsString(res), HttpStatus.OK);
+
+
+
+            } catch (JsonProcessingException e) {
+
+                e.printStackTrace();
+                log.info("response is ok 2; HttpStatus.OK");
+
+                return new ResponseEntity<>(res.toString(), HttpStatus.OK);
+
+            }
+
+        }
+
+        else{                log.info("response is ok 1; HttpStatus.NotAcceptable");
+
+            return new ResponseEntity<>( HttpStatus.NOT_ACCEPTABLE) ;
+
+        }
+
+    }
 
 
 }
