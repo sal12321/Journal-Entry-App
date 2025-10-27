@@ -34,6 +34,7 @@ public class UserController {
         private UserEntryService userEntryService ;
         @Autowired
         WeatherService weatherService ;
+
         @Autowired
         UserSchedular userSchedular ;
 

@@ -37,7 +37,7 @@ public class UserSchedular {
 
 
 
-
+@Scheduled(cron = "0 0 0 * * 0")
 public void fetchUserAndSendSaMail(){
         List<SAuser> users  =  userRepositoryImpl.getUsersForSA();
         for(SAuser user : users){
