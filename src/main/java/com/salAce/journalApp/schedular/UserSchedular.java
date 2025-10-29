@@ -37,8 +37,7 @@ public class UserSchedular {
 
 
 
-@Scheduled(cron = "0 0 0 * * 0")
-public void fetchUserAndSendSaMail(){
+gitpublic void fetchUserAndSendSaMail(){
         List<SAuser> users  =  userRepositoryImpl.getUsersForSA();
         for(SAuser user : users){
             List<JournalEntry> journalEntries =  user.getJournalEntries() ;
