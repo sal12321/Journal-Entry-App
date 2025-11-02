@@ -80,22 +80,22 @@
 
 
 
-	<dependency>
-		<groupId>io.jsonwebtoken</groupId>
-		<artifactId>jjwt-api</artifactId>
-		<version>0.12.5</version>
-	</dependency>
-	<dependency>
-		<groupId>io.jsonwebtoken</groupId>
-		<artifactId>jjwt-jackson</artifactId>
-		<version>0.12.5</version>
-	</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.12.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.5</version>
+		</dependency>
 
-<!--		<dependency>-->
-<!--		<groupId>org.springdoc</groupId>-->
-<!--		<artifactId>springdoc-openapi-ui</artifactId>-->
-<!--		<version>1.7.0</version>-->
-<!--	</dependency>-->
+		<!--		<dependency>-->
+		<!--		<groupId>org.springdoc</groupId>-->
+		<!--		<artifactId>springdoc-openapi-ui</artifactId>-->
+		<!--		<version>1.7.0</version>-->
+		<!--	</dependency>-->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -105,11 +105,11 @@
 
 
 		<dependency>
-		<groupId>io.jsonwebtoken</groupId>
-		<artifactId>jjwt-impl</artifactId>
-		<version>0.12.5</version>
-		<scope>runtime</scope>
-	</dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.12.5</version>
+			<scope>runtime</scope>
+		</dependency>
 
 
 
@@ -131,15 +131,15 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.7.0.1746</version>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>15</source>
-                    <target>15</target>
-                </configuration>
-            </plugin>
-        </plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>15</source>
+					<target>15</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>

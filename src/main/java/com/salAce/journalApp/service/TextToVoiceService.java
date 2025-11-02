@@ -15,10 +15,10 @@ public class TextToVoiceService {
     private RestTemplate restTemplate;
 
 
-    @Value("${elevenlabs.api}")
+//    @Value("${elevenlabs.api}")
     private String api;
 
-    @Value("${elevenlabs.api.key}")
+//    @Value("${elevenlabs.api.key}")
     private String apiKey;
 
 
