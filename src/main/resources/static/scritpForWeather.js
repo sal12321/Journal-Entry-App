@@ -1,7 +1,7 @@
 //const API_URL = "http://localhost:8080";
 //const API_URL = 'https://journal-entry-app-production.up.railway.app/';
 //const API_URL = 'https://journal-entry-app-production.up.railway.app/';
-//const API_URL = 'https://journal-entry-app-production.up.railway.app/';
+const API_URL = 'https://journal-entry-app-production.up.railway.app/';
 
 async function fetchWeather() {
             const city = document.getElementById('cityInput').value.trim();
