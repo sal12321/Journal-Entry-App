@@ -245,12 +245,12 @@
         }
 
         .card .info-item {
-            background: #f9fafb;
+            background: #ff00001a;
             border: 1px solid #e5e7eb;
         }
 
         .card .info-item:hover {
-            background: #f3f4f6;
+            background: #ff07071a;
             border-color: #d1d5db;
         }
 
