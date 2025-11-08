@@ -1,48 +1,40 @@
-let recognition;
-let finalTranscript = '';
-
-if ('webkitSpeechRecognition' in window) {
-    recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
-
-    recognition.onresult = (event) => {
-        let interim = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-                finalTranscript += event.results[i][0].transcript;
-            } else {
-                interim += event.results[i][0].transcript;
-            }
-        }
-        document.getElementById('entryContent').value = finalTranscript + ' ' + interim;
-    };
-
-    recognition.onerror = (e) => console.error('Speech error:', e);
-    recognition.onend = () => console.log('Speech recognition ended.');
+if (!('webkitSpeechRecognition' in window)) {
+  alert("Voice input not supported in this browser. Use Chrome or Edge.");
 } else {
-    alert("Speech recognition not supported in this browser.");
+  const recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
+
+  let tempTranscript = '';
+
+  recognition.onresult = (event) => {
+    let currentText = document.getElementById('editEntryContent').value;
+    let finalChunk = '';
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      const transcript = event.results[i][0].transcript.trim();
+      if (event.results[i].isFinal) finalChunk += transcript + ' ';
+    }
+
+    if (finalChunk) {
+      // append the new spoken text
+      document.getElementById('editEntryContent').value = currentText + (currentText ? ' ' : '') + finalChunk;
+    }
+
+  };
+
+  recognition.onerror = (e) => console.error('Speech recognition error:', e);
+  recognition.onend = () => console.log('Stopped listening.');
+  document.getElementById('startBtn').onclick = () => {
+      recognition.start();
+      console.log('Listening...');
+    };
+    document.getElementById('stopBtn').onclick = () => {
+        recognition.stop();
+        console.log('stop Listening...');
+      };
+
 }
 
-document.getElementByClass('startBtn').onclick = () => {
-    finalTranscript = '';
-    recognition.start();
-};
-
-document.getElementByClass('stopBtn').onclick = () => {
-    recognition.stop();
-};
-
-document.getElementByClass('saveBtn').onclick = async () => {
-    const text = document.getElementById('entryContent').value.trim();
-    if (!text) return alert("Empty entry!");
-    await fetch("/api/journal/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: text })
-    });
-    alert("Journal saved!");
-    document.getElementById('entryContent').value = '';
-};
-</script>
+if (recognitionListening) { recognition.stop(); }
+else { recognition.start(); }
