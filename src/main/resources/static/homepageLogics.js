@@ -162,18 +162,18 @@ async function login(e) {
             }
 
             // Show success toast
-            showSuccess(`Welcome back, ${userName}! 🎉`);
+            showSuccess(`Welcome back, ${userName}! `);
 
             // Load user's journal entries
             loadJournalEntries();
         } else {
-            console.log('❌ Login failed - backend returned empty string');
+            console.log('Login failed - backend returned empty string');
             showError('loginError', 'Invalid username or password');
         }
     } catch (error) {
         console.error('Login error:', error);
-        showError('loginError', 'Login failed. Please check if backend is running.');
-        showErrorToast('Connection error. Please check your internet connection.');
+        showError('loginError', 'Login failed');
+
     }
 }
 
