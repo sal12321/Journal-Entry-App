@@ -1,40 +1,52 @@
-if (!('webkitSpeechRecognition' in window)) {
-  alert("Voice input not supported in this browser. Use Chrome or Edge.");
-} else {
+
+
+function setupVoiceButton(buttonId, textareaId) {
+  const button = document.getElementById(buttonId);
+  const textarea = document.getElementById(textareaId);
+
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Voice input not supported in this browser. Use Chrome or Edge.");
+    return;
+  }
+
   const recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';
 
-  let tempTranscript = '';
-
   recognition.onresult = (event) => {
-    let currentText = document.getElementById('editEntryContent').value;
+    let currentText = textarea.value;
     let finalChunk = '';
+
     for (let i = event.resultIndex; i < event.results.length; ++i) {
       const transcript = event.results[i][0].transcript.trim();
       if (event.results[i].isFinal) finalChunk += transcript + ' ';
     }
 
     if (finalChunk) {
-      // append the new spoken text
-      document.getElementById('editEntryContent').value = currentText + (currentText ? ' ' : '') + finalChunk;
+      textarea.value = currentText + (currentText ? ' ' : '') + finalChunk;
     }
-
   };
 
   recognition.onerror = (e) => console.error('Speech recognition error:', e);
-  recognition.onend = () => console.log('Stopped listening.');
-  document.getElementById('startBtn').onclick = () => {
-      recognition.start();
-      console.log('Listening...');
-    };
-    document.getElementById('stopBtn').onclick = () => {
-        recognition.stop();
-        console.log('stop Listening...');
-      };
+  recognition.onend = () => {
 
+    button.textContent = 'START TALKING';
+  };
+
+  button.onclick = () => {
+    if (button.textContent === 'START TALKING') {
+
+      recognition.start();
+      button.textContent = 'STOP';
+    } else {
+
+      recognition.stop();
+      button.textContent = 'START TALKING';
+    }
+  };
 }
 
-if (recognitionListening) { recognition.stop(); }
-else { recognition.start(); }
+// setting up both the button on page load
+setupVoiceButton('voiceBtnCreateEntry', 'entryContent');
+setupVoiceButton('voiceBtnUpdateEntry', 'editEntryContent');
