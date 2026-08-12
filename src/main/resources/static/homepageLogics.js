@@ -1,7 +1,7 @@
 //    const API_URL = 'https://journal-entry-app-production.up.railway.app/';
 //    const API_URL = 'https://journal-entry-app-production.up.railway.app';
 //const API_URL = 'http://localhost:8080';  //for localhost
-const API_URL = "https://mindlog-production-97b0.up.railway.app"; // @270
+const API_URL = "https://mindlog-production-1f42.up.railway.app"; // @270
 
 let authToken = '';
 let currentUser = {};
@@ -134,10 +134,10 @@ async function login(e) {
             body: JSON.stringify(requestData)
         });
 
-        console.log('Response status:', response.status);
+//        console.log('Response status:', response.status);
 
         const data = await response.json();
-        console.log('Response from backend:', data);
+//        console.log('Response from backend:', data);
 
         if (data.jwt != "") {
             authToken = data.jwt;
