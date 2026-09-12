@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:8080/api';
+// const API_URL = 'http://localhost:8080/api';
+import API_URL from "./urls"
+const API_URL = API_URL+"/api";
 // const API_URL = 'https://mindlog-production-97b0.up.railway.app/api';
 
 // ---------- Auth helpers (persisted so they survive page navigation) ----------

@@ -1,7 +1,8 @@
-//    const API_URL = 'https://journal-entry-app-production.up.railway.app/';
-//    const API_URL = 'https://journal-entry-app-production.up.railway.app';
-const API_URL = 'http://localhost:8080';  //for localhost
-//const API_URL = "https://mindlog-production-97b0.up.railway.app"; // @270
+import API_URL from "./url"
+// const API_URL = 'http://localhost:8080';  //for localhost
+// const API_URL = '';  //for aws ec2
+
+
 
 let authToken = '';
 let currentUser = {};

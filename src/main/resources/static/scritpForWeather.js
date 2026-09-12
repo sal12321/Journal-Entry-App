@@ -1,7 +1,9 @@
-const API_URL = "http://localhost:8080/api";
-//const API_URL = 'https://journal-entry-app-production.up.railway.app/';
-//const API_URL = 'https://journal-entry-app-production.up.railway.app/';
-//const API_URL = 'https://mindlog-production-97b0.up.railway.app';  //@270
+import API_URL from "./urls"
+
+const API_URL = API_URL + "/api"
+
+// const API_URL = "http://localhost:8080/api";
+
 
 async function fetchWeather() {
             const city = document.getElementById('cityInput').value.trim();
