@@ -8,6 +8,7 @@ import com.salAce.MindLog.api.response.WeatherResponse;
 import com.salAce.MindLog.entity.LoginDTO;
 import com.salAce.MindLog.entity.SAuser;
 import com.salAce.MindLog.entity.User;
+import com.salAce.MindLog.entity.WeatherCacheResult;
 import com.salAce.MindLog.repo.UserEntryRepo;
 import com.salAce.MindLog.service.*;
 import com.salAce.MindLog.utils.JwtUtil;
@@ -134,7 +135,7 @@ try{
     public ResponseEntity<?> greeting(@RequestParam("city") String city ){
         ;
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        WeatherResponse res = weatherService.getWeather(city);
+        WeatherCacheResult res = weatherService.getWeather(city);
 
 
 

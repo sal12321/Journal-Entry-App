@@ -2,6 +2,7 @@ package com.salAce.MindLog.service;
 
 import com.salAce.MindLog.api.response.WeatherResponse;
 import com.salAce.MindLog.cache.WeatherAppCache;
+import com.salAce.MindLog.entity.WeatherCacheResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -28,12 +29,13 @@ public class WeatherService {
 
     private String  api ;
 
-    public WeatherResponse getWeather(String  city ) {
+    public WeatherCacheResult getWeather(String  city ) {
 
 
-       WeatherResponse cacheResponse =  redisService.get("weather of " + city , WeatherResponse.class) ;
+        WeatherCacheResult cacheResponse =  redisService.get("weather of " + city , WeatherResponse.class) ;
 
-       if(cacheResponse != null) {
+       if(cacheResponse.getData() != null) { // if data was not found in redis then that will return null data
+
            return cacheResponse ; // if the response for that request is preset in redis then return the data from redis
        }
        else {  // if response is not there in redis then get through api and store in redis
@@ -47,7 +49,8 @@ public class WeatherService {
            if(body != null) {
                redisService.set("weather of " + city , body , 300l); // store the response in redis for 300 seconds or 5 minutes
            }
-           return body;
+
+           return new WeatherCacheResult<>(body, 0, false);
        }
 
 

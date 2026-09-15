@@ -1,6 +1,7 @@
 package com.salAce.MindLog.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salAce.MindLog.entity.WeatherCacheResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,22 +14,28 @@ import java.util.concurrent.TimeUnit;
 public class RedisService {
     @Autowired
     private RedisTemplate redisTemplate ;
-    public <T> T get(String key, Class<T> entityClass){
-        try{
-            Object o;
-            o = redisTemplate.opsForValue().get(key);
+    public <T> WeatherCacheResult get(String key, Class<T> entityClass) {
+
+        long startTime = System.currentTimeMillis();
+        long duration = 0;
+        try {
+            Object raw;
+            raw = redisTemplate.opsForValue().get(key);
+            duration = System.currentTimeMillis() - startTime;
             ObjectMapper mapper = new ObjectMapper();
-            if(o != null){
-                log.info("This response is generated from Redis");
-                return mapper.readValue(o.toString() , entityClass) ;
-            }
-            else {
-                return null ;
+            if (raw != null) {
+                log.info("This response is generated from Redis, cache HIT");
+                T data = mapper.readValue(raw.toString(), entityClass);
+                return new WeatherCacheResult<>(data, duration, true);
+            } else {
+                log.info("Redis MISS for key: {} ({}ms)", key, duration);
+
+                return new WeatherCacheResult<>(null, duration, false);
             }
 
-        } catch(Exception e ){
-            log.error("error in redis get method " + e.getMessage() );
-            return null ;
+        } catch (Exception e) {
+            log.error("error in redis get method " + e.getMessage());
+            return new WeatherCacheResult<>(null, duration, false);
         }
 
 
