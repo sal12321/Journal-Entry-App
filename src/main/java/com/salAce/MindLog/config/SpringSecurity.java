@@ -256,7 +256,7 @@ public class SpringSecurity {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 //        for local devs and production
-        config.setAllowedOrigins(List.of("http://localhost:3000", "https://mindlog-jurnaling-frontend-using-ne.vercel.app"));
+        config.setAllowedOrigins(List.of("http://localhost:3000", "https://mindlog-jurnaling-frontend-using-ne.vercel.app", "https://mindlog-journaling.duckdns.org/api"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
