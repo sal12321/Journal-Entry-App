@@ -9,6 +9,10 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -91,6 +95,43 @@ public class UserEntryService {
             return userEntryRepo.findByUserName(userName) ;
 
         }
+        public Long deleteAdmin(String email){
+
+            Long count = 0L;
+
+            try{
+                count = userEntryRepo.deleteByEmail(email);
+                log.info(count + "users were deleted with email " + email);
+
+
+            } catch (Exception e){
+                log.info(e.getMessage());
+                log.info("0 users deleted with email : " + email);
+            }
+
+                return count;
+
+
+        }
+
+        public Long updateAdmin(User user){
+            Long count = 0L;
+        try{
+             count =  userEntryRepo.updateUserDetailsByEmail(user.getEmail(), user.getUserName(), user.isSentimentAnalysis());
+            log.info(count + "Admin was updated with email " + user.getEmail());
+
+            return count;
+        }
+        catch (Exception e){
+            log.info(e.getMessage());
+
+
+            }
+
+        return count;
+
+        }
+
 
     }
 
