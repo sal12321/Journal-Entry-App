@@ -35,6 +35,7 @@ https://journal-app-3fpe.onrender.com
 - [Docker Deployment](#-docker-deployment)
 - [Security Highlights](#-security-highlights)
 - [Roadmap](#-roadmap)
+- [Screenshots](#-screenshots)
 - [Author](#-author)
 
 ---
@@ -302,9 +303,21 @@ App available at `http://localhost:8080`.
 
 ## 📸 Screenshots
 
-| Swagger | Redis | MongoDB | SonarQube |
-|---------|-------|---------|-----------|
-| ![Swagger](DBimg/swagger/Screenshot%202025-10-04%20181919.png) | ![Redis](DBimg/Redis/get.png) | ![MongoDB](DBimg/storing%20the%20data%20from%20atlas.png) | ![SonarQube](DBimg/sonarQube%20code%20quaity%20test.png) |
+### API Documentation
+![Swagger](DBimg/swagger/Screenshot%202025-10-04%20181919.png)
+
+### Redis Caching in Action
+
+| Cache Miss → Stored | Cache Hit |
+|:---:|:---:|
+| ![Cache Stored](DBimg/Redis/cache_stored.png) | ![Cache Hit](DBimg/Redis/cache_hit.png) |
+| First request hits MongoDB, response gets cached | Subsequent request served from Redis, no DB hit |
+
+### MongoDB Atlas
+![MongoDB](DBimg/storing%20the%20data%20from%20atlas.png)
+
+### Code Quality — SonarQube
+![SonarQube](DBimg/sonarQube%20code%20quaity%20test.png)
 
 ---
 
@@ -314,6 +327,8 @@ App available at `http://localhost:8080`.
 Full-stack developer — Java/Spring Boot, Node.js/Express, React/Vite, MongoDB
 
 - GitHub: [@sal12321](https://github.com/sal12321)
+- Portfolio: [portfolio-aaqib-beige.vercel.app](https://portfolio-aaqib-beige.vercel.app/)
+- LinkedIn: [Aaqib Alam](https://www.linkedin.com/in/aaqib-alam-50929a204/)
 
 ---
 
