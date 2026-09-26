@@ -6,16 +6,15 @@
 [![Redis](https://img.shields.io/badge/Redis-Cache-red)]()
 [![JWT](https://img.shields.io/badge/JWT-Secured-blue)]()
 [![Docker](https://img.shields.io/badge/Docker-Containerized-blue)]()
+[![License](https://img.shields.io/badge/License-MIT-lightgrey)]()
 
-A production-ready backend application built using **Spring Boot 3**, **Spring Security 6**, **MongoDB**, **Redis**, **JWT Authentication**, and **Docker**.
+A production-ready backend built with **Spring Boot 3**, **Spring Security 6**, **MongoDB**, **Redis**, **JWT Authentication**, and **Docker**.
 
-JournalApp enables users to securely manage personal journal entries while providing advanced capabilities such as role-based authorization, sentiment analysis, email notifications, text-to-speech generation, weather integration, Redis caching, and cloud deployment.
+JournalApp lets users securely manage personal journal entries, with role-based authorization, sentiment analysis, email notifications, text-to-speech generation, weather integration, Redis caching, and cloud deployment.
 
 ---
 
 ## 🚀 Live Application
-
-**Production URL**
 
 ```text
 https://journal-app-3fpe.onrender.com
@@ -23,63 +22,60 @@ https://journal-app-3fpe.onrender.com
 
 ---
 
+## 📑 Table of Contents
+
+- [Core Features](#-core-features)
+- [Architecture](#️-architecture)
+- [Technology Stack](#️-technology-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Environment Variables](#️-environment-variables)
+- [API Reference](#-api-reference)
+- [Redis Caching](#-redis-caching)
+- [Docker Deployment](#-docker-deployment)
+- [Security Highlights](#-security-highlights)
+- [Roadmap](#-roadmap)
+- [Author](#-author)
+
+---
+
 ## ✨ Core Features
 
 ### 🔐 Authentication & Authorization
-
-- JWT Authentication
-- Spring Security 6
-- BCrypt Password Hashing
-- Stateless Security Architecture
-- Protected REST APIs
-- Role-Based Access Control (RBAC)
-- ADMIN and USER Roles
+- JWT authentication, stateless architecture
+- Spring Security 6 + BCrypt password hashing
+- Role-based access control (`USER`, `ADMIN`)
 
 ### 📓 Journal Management
-
-- Create Journal Entries
-- Update Journal Entries
-- Delete Journal Entries
-- Retrieve Personal Journals
-- Sentiment Tracking
-- User-Specific Data Isolation
+- Create, update, delete, and retrieve journal entries
+- Sentiment tracking per entry
+- Per-user data isolation
 
 ### 👤 User Management
-
-- User Registration
-- Secure Login
-- Profile Updates
-- Password Updates
-- Email Preferences
-- Sentiment Analysis Preferences
+- Registration & secure login
+- Profile and password updates
+- Email and sentiment-analysis preferences
 
 ### 👨‍💼 Admin Features
-
-- Create Admin Accounts
-- View All Registered Users
-- Administrative Operations
-- Role-Based Endpoint Protection
+- Create admin accounts
+- View all registered users
+- Role-protected admin endpoints
 
 ### ⚡ Performance & Scalability
-
-- Redis Caching
-- Reduced Database Calls
-- Faster API Responses
-- Improved Application Performance
+- Redis caching to cut redundant DB calls
+- Faster API response times
 
 ### 🤖 AI & Utility Services
-
-- Text-to-Speech Generation
-- Sentiment Analysis
-- Email Notifications
-- Weather Information Integration
+- Text-to-speech generation
+- Sentiment analysis
+- Email notifications
+- Weather info integration
 
 ### ☁️ Deployment & DevOps
-
-- Dockerized Application
-- GitHub Actions CI Pipeline
-- Render Cloud Deployment
-- OpenAPI Documentation
+- Dockerized app
+- GitHub Actions CI pipeline
+- Render cloud deployment
+- OpenAPI/Swagger docs
 
 ---
 
@@ -89,7 +85,7 @@ https://journal-app-3fpe.onrender.com
 Client
    │
    ▼
-JWT Authentication
+JWT Authentication Filter
    │
    ▼
 Spring Security
@@ -109,39 +105,14 @@ Redis Cache     MongoDB
 
 ## 🛠️ Technology Stack
 
-### Backend
-
-- Java 17
-- Spring Boot 3
-- Spring Security 6
-- Spring Data MongoDB
-- Spring Cache
-- Maven
-
-### Database
-
-- MongoDB Atlas
-
-### Caching
-
-- Redis
-
-### Security
-
-- JWT Authentication
-- BCrypt Password Encoding
-- Role-Based Access Control
-
-### Documentation
-
-- OpenAPI 3
-- Swagger UI
-
-### DevOps
-
-- Docker
-- GitHub Actions
-- Render
+| Layer          | Tech                                              |
+|----------------|----------------------------------------------------|
+| Backend        | Java 17, Spring Boot 3, Spring Security 6, Maven   |
+| Data           | Spring Data MongoDB, MongoDB Atlas                 |
+| Caching        | Redis, Spring Cache                                |
+| Security       | JWT, BCrypt, RBAC                                  |
+| Docs           | OpenAPI 3, Swagger UI                              |
+| DevOps         | Docker, GitHub Actions, Render                     |
 
 ---
 
@@ -161,185 +132,39 @@ src
 │   │   ├── cache
 │   │   ├── schedular
 │   │   ├── utils
-│   │   └── JournalApplication
-│   │
+│   │   └── JournalApplication.java
 │   └── resources
 │       ├── static
 │       └── application.properties
-│
 └── test
 ```
 
 ---
 
-## 🔑 Authentication
+## 🚀 Getting Started
 
-### Register
+### Prerequisites
+- Java 17+
+- Maven
+- MongoDB Atlas URI
+- Redis instance
 
-```http
-POST /public/signup
-```
-
-Request
-
-```json
-{
-  "userName": "john",
-  "password": "password123",
-  "email": "john@example.com"
-}
-```
-
----
-
-### Login
-
-```http
-POST /public/login
-```
-
-Request
-
-```json
-{
-  "userName": "john",
-  "password": "password123"
-}
-```
-
-Response
-
-```json
-{
-  "token": "JWT_TOKEN"
-}
-```
-
-Use the token for protected APIs:
-
-```http
-Authorization: Bearer JWT_TOKEN
-```
-
----
-
-## 📓 Journal APIs
-
-### Create Journal Entry
-
-```http
-POST /journal
-```
-
-```json
-{
-  "title": "My First Journal",
-  "content": "Today was productive.",
-  "sentiment": "HAPPY"
-}
-```
-
-### Get All Journal Entries
-
-```http
-GET /journal
-```
-
-### Get Journal Entry By ID
-
-```http
-GET /journal/id/{id}
-```
-
-### Update Journal Entry
-
-```http
-PUT /journal/id/{id}
-```
-
-### Delete Journal Entry
-
-```http
-DELETE /journal/id/{id}
-```
-
----
-
-## 👨‍💼 Admin APIs
-
-### Create Admin
-
-```http
-POST /admin/create-admin
-```
-
-### View All Users
-
-```http
-GET /admin/all-users
-```
-
----
-
-## 🎙️ Text To Speech API
-
-```http
-POST /TextToVoice
-```
-
-Request
-
-```json
-{
-  "text": "Hello World",
-  "modelId": "voice-model"
-}
-```
-
-Response
-
-```text
-Audio Output
-```
-
----
-
-## ⚡ Redis Caching
-
-Redis is used to cache frequently accessed application data and reduce repeated database queries.
-
-### Benefits
-
-- Faster Response Times
-- Reduced MongoDB Load
-- Improved Scalability
-- Better User Experience
-
----
-
-## 🐳 Docker Deployment
-
-### Build Docker Image
+### Clone & Run
 
 ```bash
-docker build -t journal-app .
+git clone https://github.com/sal12321/Journal-Entry-App.git
+cd Journal-Entry-App
+mvn clean package
+java -jar target/*.jar
 ```
 
-### Run Docker Container
-
-```bash
-docker run -p 8080:8080 journal-app
-```
-
-Application will be available at:
-
-```text
-http://localhost:8080
-```
+App runs at `http://localhost:8080`.
 
 ---
 
 ## ⚙️ Environment Variables
+
+Create a `.env` or set these in your environment:
 
 ```env
 MONGODB_URI=your_mongodb_uri
@@ -353,99 +178,145 @@ GEMINI_API_KEY=your_api_key
 
 ---
 
-## 🚀 Local Setup
+## 📚 API Reference
 
-### Clone Repository
+Full interactive docs via Swagger UI at `/swagger-ui.html`, or import into Postman via the OpenAPI spec.
 
-```bash
-git clone https://github.com/sal12321/Journal-Entry-App.git
+### 🔑 Auth
+
+| Method | Endpoint          | Description         |
+|--------|-------------------|----------------------|
+| POST   | `/public/signup`  | Register new user   |
+| POST   | `/public/login`   | Login, returns JWT  |
+
+**Register**
+```json
+POST /public/signup
+{
+  "userName": "john",
+  "password": "password123",
+  "email": "john@example.com"
+}
 ```
 
-```bash
-cd Journal-Entry-App
+**Login**
+```json
+POST /public/login
+{
+  "userName": "john",
+  "password": "password123"
+}
+```
+Response:
+```json
+{ "token": "JWT_TOKEN" }
 ```
 
-### Build Project
-
-```bash
-mvn clean package
+Use the token on protected routes:
+```http
+Authorization: Bearer JWT_TOKEN
 ```
 
-### Run Application
+### 📓 Journal
 
-```bash
-java -jar target/*.jar
+| Method | Endpoint             | Description             |
+|--------|-----------------------|--------------------------|
+| POST   | `/journal`             | Create entry             |
+| GET    | `/journal`              | Get all entries (user)   |
+| GET    | `/journal/id/{id}`      | Get entry by ID          |
+| PUT    | `/journal/id/{id}`      | Update entry             |
+| DELETE | `/journal/id/{id}`      | Delete entry              |
+
+```json
+POST /journal
+{
+  "title": "My First Journal",
+  "content": "Today was productive.",
+  "sentiment": "HAPPY"
+}
 ```
+
+### 👨‍💼 Admin
+
+| Method | Endpoint                | Description        |
+|--------|--------------------------|---------------------|
+| POST   | `/admin/create-admin`    | Create admin user  |
+| GET    | `/admin/all-users`       | List all users     |
+
+### 🎙️ Text-to-Speech
+
+```json
+POST /TextToVoice
+{
+  "text": "Hello World",
+  "modelId": "voice-model"
+}
+```
+Returns audio output.
 
 ---
 
-## 📚 API Documentation
+## ⚡ Redis Caching
 
-The application includes OpenAPI documentation and can be explored using Swagger UI or imported into Postman.
+Frequently accessed data is cached in Redis to cut repeated MongoDB queries — faster responses, lower DB load, better scalability under concurrent users.
 
 ---
 
-## 📸 Screenshots
+## 🐳 Docker Deployment
 
-### Swagger Documentation
-
-![Swagger](DBimg/swagger/Screenshot%202025-10-04%20181919.png)
-
-### Redis Caching
-
-![Redis](DBimg/Redis/get.png)
-
-### MongoDB Atlas Integration
-
-![MongoDB](DBimg/storing%20the%20data%20from%20atlas.png)
-
-### SonarQube Analysis
-
-![SonarQube](DBimg/sonarQube%20code%20quaity%20test.png)
+```bash
+docker build -t journal-app .
+docker run -p 8080:8080 journal-app
+```
+App available at `http://localhost:8080`.
 
 ---
 
 ## 🔒 Security Highlights
 
-- JWT-Based Authentication
-- BCrypt Password Hashing
-- Role-Based Authorization
-- Protected Administrative Endpoints
-- Stateless Authentication Flow
+- JWT-based, stateless authentication
+- BCrypt password hashing
+- Role-based authorization on admin routes
+- Protected REST endpoints throughout
 
 ---
 
 ## 📈 Performance Highlights
 
-- Redis Caching
-- Optimized Database Access
-- Reduced Response Latency
-- Scalable Service Architecture
+- Redis caching layer
+- Optimized DB access patterns
+- Reduced response latency under load
 
 ---
 
-## 🔮 Future Enhancements
+## 🔮 Roadmap
 
-- Refresh Token Support
-- OAuth2 Authentication
-- API Rate Limiting
-- Kubernetes Deployment
-- Distributed Tracing
-- Multi-Factor Authentication (MFA)
+- [ ] Refresh token support
+- [ ] OAuth2 authentication
+- [ ] API rate limiting
+- [ ] Kubernetes deployment
+- [ ] Distributed tracing
+- [ ] Multi-factor authentication (MFA)
+
+---
+
+## 📸 Screenshots
+
+| Swagger | Redis | MongoDB | SonarQube |
+|---------|-------|---------|-----------|
+| ![Swagger](DBimg/swagger/Screenshot%202025-10-04%20181919.png) | ![Redis](DBimg/Redis/get.png) | ![MongoDB](DBimg/storing%20the%20data%20from%20atlas.png) | ![SonarQube](DBimg/sonarQube%20code%20quaity%20test.png) |
 
 ---
 
 ## 👨‍💻 Author
 
-### Aaqib Alam
+**Sal**
+Full-stack developer — Java/Spring Boot, Node.js/Express, React/Vite, MongoDB
 
-Java Backend Developer | Spring Boot Enthusiast
-
-- GitHub: https://github.com/sal12321
-- LinkedIn: https://www.linkedin.com/in/aaqib-alam-50929a204/
+- GitHub: [@sal12321](https://github.com/sal12321)
 
 ---
 
 ## ⭐ Support
 
-If you found this project useful, consider giving it a star.
+If this project is useful, drop a star on the repo.
