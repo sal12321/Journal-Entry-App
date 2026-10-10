@@ -63,6 +63,8 @@ logs/
 
 # Environment Files
 .env
+**/application-dev.properties
+
 
 # Sensitive application properties (optional)
 # If you want to exclude your application.properties in public repo, uncomment below
